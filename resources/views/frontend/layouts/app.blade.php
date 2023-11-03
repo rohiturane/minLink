@@ -83,9 +83,7 @@
                     </ul>
                 </div>
                 @else 
-                    <a id="loginBtn" href="{{ url('/login')}}" class="btn btn-sm m-sm-2 m-1 bg-primary text-white rounded-5 px-sm-3 px-2">Login
-                        
-                    </a>
+                    <a id="loginBtn" href="{{ url('/login')}}" class="btn btn-sm m-sm-2 m-1 bg-primary text-white rounded-5 px-sm-3 px-2">Login</a>
                 @endif
             </div>
         </div>
@@ -260,14 +258,30 @@
     </div>
     <a id="back-to-top" href="#" class="btn btn-secondary btn-md back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>
     <script src="{{asset('js/custom.js')}}"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render={{config('constant.google_site_key')}}"></script>
+    @php
+        $setting = Cache::get('setting');
+            
+        if(empty($setting)) {
+            $setting = Cache::rememberForever('setting', function () {
+                return Setting::get();
+            });
+        }
+        $api_key = find_object($setting, 'google_capatch_site_key');
+    @endphp
+    @if(!$api_key->isEmpty())
+    <script src="https://www.google.com/recaptcha/api.js?render={{$api_key->first()->value}}"></script>
+    @endif
     <script>
         $(function() {
             <?php if (session()->get('status') == 'error') { ?>
                 generateToast("text-bg-danger", "{{ session()->get('message') }}");
-            <?php session()->forgot('status');
+            <?php } else if(session()->get('status') == 'success') { ?>
+                generateToast("text-bg-primary", "{{ session()->get('message') }}");
+            <?php } else if(session()->get('status')) {
+                session()->forgot('status');
                 session()->forgot('message');
-            } ?>
+              }
+             ?>
             var temp = {};
             var tools = localStorage.getItem('tools') ?? 'NA';
             

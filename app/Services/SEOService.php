@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Config;
 use Iodev\Whois\Factory as Whois;
 use Html2Text\Html2Text;
 use Faker\Provider\Lorem;
+use Illuminate\Support\Facades\Cache;
+use App\Models\Setting;
 
 class SEOService
 {
@@ -14,7 +16,15 @@ class SEOService
     public function googlePageSpeed($data)
     {
         try {
-            $url = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?category=ACCESSIBILITY&category=PERFORMANCE&category=SEO&strategy=DESKTOP&url='.$data['link'].'&key=AIzaSyBASqF-qeK6XaieImPHY1kmWh9wr0-xG6M';
+            $setting = Cache::get('setting');
+        
+            if(empty($setting)) {
+                $setting = Cache::rememberForever('setting', function () {
+                    return Setting::get();
+                });
+            }
+            $api_key = find_object($setting, 'google_api_key');
+            $url = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?category=ACCESSIBILITY&category=PERFORMANCE&category=SEO&strategy=DESKTOP&url='.$data['link'].'&key='.$api_key->first()->value;
             $source = curl_call($url, 'get',[]);
             $source = json_decode($source);
 
@@ -270,8 +280,10 @@ class SEOService
                 }
             }
             return $dataArray;
-        } catch (\Throwable $th) {
-            //throw $th;
+        } catch (\Exception $e) {
+            session()->flash('status','error');
+            session()->flash('message', $e->getMessage());
+            return;
         }
     }
 

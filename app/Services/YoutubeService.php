@@ -5,18 +5,29 @@ namespace App\Services;
 use Google\Client;
 use Google\Service\YouTube;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cache;
+use App\Models\Setting;
 
 class YoutubeService
 {
     
     private function commonYoutube()
     {
+        $setting = Cache::get('setting');
+        
+        if(empty($setting)) {
+            $setting = Cache::rememberForever('setting', function () {
+                return Setting::get();
+            });
+        }
+        $api_key = find_object($setting, 'google_api_key');
         $client = new Client();
-        $client->setDeveloperKey(Config::get('constant.google_api_key'));
+        $client->setDeveloperKey($api_key->first()->value);
         
         $youtube = new YouTube($client);
 
         return $youtube;
+    
     }
 
     public function getTrendingData($data)

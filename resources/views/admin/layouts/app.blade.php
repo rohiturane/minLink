@@ -147,6 +147,19 @@
   <script src="{{ asset('/libs/simplebar/dist/simplebar.js')}}"></script>
   <script src="{{ asset('/js/dashboard.js')}}"></script>
   <script src="{{ asset('/js/custom.js')}}"></script>
+  <script>
+    $(function() {
+            <?php if (session()->get('status') == 'error') { ?>
+                generateToast("text-bg-danger", "{{ session()->get('message') }}");
+            <?php } if(session()->get('status') == 'success') { ?>
+                generateToast("text-bg-primary", "{{ session()->get('message') }}");
+            <?php } else if(session()->get('status')) {
+                session()->forgot('status');
+                session()->forgot('message');
+              }
+             ?>
+    });
+  </script>
 </body>
 
 </html>

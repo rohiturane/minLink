@@ -10,6 +10,7 @@ use App\Models\Setting;
 use Melbahja\Seo\Sitemap;
 use Melbahja\Seo\Ping;
 use App\Models\Post;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -21,6 +22,10 @@ class HomeController extends Controller
         if(!empty($page_info)) {
             $page_meta = generate_meta_information($page_info);
         }
+
+        $settings = Cache::rememberForever('setting', function () {
+            return Setting::get();
+        });
 
         return view('frontend.home',compact('page_info','page_meta'));
     }
@@ -59,8 +64,8 @@ class HomeController extends Controller
 
     public function settingStore(Request $request)
     {
-        $input_array = $request->expect('_token');
-
+        $input_array = $request->all();
+        unset($input_array['_token']);
         foreach($input_array as $key => $value)
         {
             Setting::updateOrCreate(['key' => $key], ['value'=> $value]);
@@ -69,7 +74,7 @@ class HomeController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Setting updated successfully');
 
-        return redirect('/setting');
+        return redirect('/admin/setting');
     }
 
     public function pageMeta()
@@ -104,7 +109,7 @@ class HomeController extends Controller
         session()->flash('status', 'success');
         session()->flash('message', 'Page Information store successfully');
 
-        return redirect('/page_informations');
+        return redirect('/admin/page_informations');
     }
 
     public function pageEdit($id)
@@ -139,7 +144,7 @@ class HomeController extends Controller
         session()->flash('status', 'success');
         session()->flash('message', 'Page Information update successfully');
 
-        return redirect('/page_informations');
+        return redirect('/admin/page_informations');
     }
 
     public function pageDelete($id)
@@ -150,14 +155,14 @@ class HomeController extends Controller
         {
             session()->flash('status','error');
             session()->flash('message','Page not found');
-            return redirect('/page_informations');
+            return redirect('/admin/page_informations');
         }
 
         $page->delete();
 
         session()->flash('status','success');
         session()->flash('message','Page Information deleted Successfully');
-        return redirect('/page_informations');
+        return redirect('/admin/page_informations');
     }
 
     public function generateSiteMap()
