@@ -96,7 +96,7 @@ Route::post('/auth/authenicate/user', [AuthController::class,'authenicate']);
 Route::get('/register', [AuthController::class,'register']);
 Route::post('/auth/register/user', [AuthController::class, 'registerUser']);
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     // Account Page
     Route::get('/dashboard', [HomeController::class,'dashboard']);
     Route::post('/logout', [AuthController::class, 'logout']);
