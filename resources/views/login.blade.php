@@ -7,6 +7,10 @@
   <title>Super Tools</title>
   <meta name="title" content="Super Tools" />
   <meta name="description" content="Login to Super Tools Platforms" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/apple-touch-icon.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/favicon-32x32.png')}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/favicon-16x16.png')}}">
+  <link rel="manifest" href="{{asset('/site.webmanifest')}}">
   <meta name="author" content="DevRohit" />
   <link rel="canonical" href="http://127.0.0.1:8000" />
   <meta property="twitter:title" content="Super Tools Login" />
@@ -16,7 +20,6 @@
   <meta property="og:title" content="Super Tools Login" />
   <meta property="og:description" content="Login to Super Tools Platforms" />
   <meta property="og:image" content="http://127.0.0.1:8000/Super Tools.png" />
-  <link rel="shortcut icon" type="image/png" href="{{ asset('/images/logos/favicon.png')}}" />
   <link rel="stylesheet" href="{{ asset('/css/styles.min.css')}}" />
 </head>
 
