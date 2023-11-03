@@ -147,6 +147,19 @@
   <script src="{{ asset('/libs/simplebar/dist/simplebar.js')}}"></script>
   <script src="{{ asset('/js/dashboard.js')}}"></script>
   <script src="{{ asset('/js/custom.js')}}"></script>
+  @php
+        $setting = Cache::get('setting');
+            
+        if(empty($setting)) {
+            $setting = Cache::rememberForever('setting', function () {
+                return Setting::get();
+            });
+        }
+        $api_key = find_object($setting, 'google_capatch_site_key');
+    @endphp
+    @if(!$api_key->isEmpty())
+    <script src="https://www.google.com/recaptcha/api.js?render={{$api_key->first()->value}}"></script>
+    @endif
   <script>
     $(function() {
             <?php if (session()->get('status') == 'error') { ?>

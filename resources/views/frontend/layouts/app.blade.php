@@ -48,19 +48,19 @@
                             </a>
                         </li>
                         <li class="nav-item iconChange  me-4 pt-2">
-                            <a href="#" class="nav-link text-center p-0">
+                            <a href="{{ url('/privacy-policy')}}" class="nav-link text-center p-0">
 
                                 <div class="smallFont textColor">Privacy Policy</div>
                             </a>
                         </li>
                         <li class="nav-item iconChange  me-3 pt-2">
-                            <a href="#" class="nav-link text-center p-0">
+                            <a href="{{url('/terms-of-service')}}" class="nav-link text-center p-0">
 
                                 <div class="smallFont textColor">Terms of Service</div>
                             </a>
                         </li>
                         <li class="nav-item iconChange  me-3 pt-2">
-                            <a href="#" class="nav-link text-center p-0">
+                            <a href="{{ url('/contact-us')}}" class="nav-link text-center p-0">
 
                                 <div class="smallFont textColor">Contact Us</div>
                             </a>

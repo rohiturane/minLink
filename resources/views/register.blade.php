@@ -64,6 +64,19 @@
   </div>
   <script src="{{ asset('/libs/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{ asset('/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+  @php
+        $setting = Cache::get('setting');
+            
+        if(empty($setting)) {
+            $setting = Cache::rememberForever('setting', function () {
+                return Setting::get();
+            });
+        }
+        $api_key = find_object($setting, 'google_capatch_site_key');
+    @endphp
+    @if(!$api_key->isEmpty())
+    <script src="https://www.google.com/recaptcha/api.js?render={{$api_key->first()->value}}"></script>
+    @endif
 </body>
 
 </html>

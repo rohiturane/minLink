@@ -88,6 +88,10 @@ Route::get('/sha-generator',[DeveloperController::class, 'shaGenerator']);
 Route::get('/bcrypt-generator', [DeveloperController::class,'bcryptGenerator']);
 Route::get('/hash-generator',[DeveloperController::class,'hashGenerator']);
 
+Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy']);
+Route::get('/terms-of-service',[HomeController::class, 'termsService']);
+Route::get('/contact-us',[HomeController::class, 'contactUs']);
+
 // Subscription
 Route::post('/auth/add-subscription', [HomeController::class, 'addSubscription']);
 
@@ -95,6 +99,7 @@ Route::get('/login', [AuthController::class,'login'])->name('login');
 Route::post('/auth/authenicate/user', [AuthController::class,'authenicate']);
 Route::get('/register', [AuthController::class,'register']);
 Route::post('/auth/register/user', [AuthController::class, 'registerUser']);
+Route::post('/logout', [AuthController::class,'logout']);
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
     // Account Page

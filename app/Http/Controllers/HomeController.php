@@ -220,4 +220,19 @@ class HomeController extends Controller
         session()->flash('message', 'Application Optimized');
         return back();
     }
+
+    public function privacyPolicy()
+    {
+        return view('frontend.privacy-policy');
+    }
+
+    public function termsService()
+    {
+        return view('frontend.terms-of-service');
+    }
+
+    public function contactUs(Request $request)
+    {
+        return view('frontend.contact-us');
+    }
 }
