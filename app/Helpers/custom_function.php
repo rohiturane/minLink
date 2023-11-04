@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\PageInformation;
+use App\Models\Setting;
 use Melbahja\Seo\MetaTags;
 
 if(!function_exists('curl_call'))
@@ -455,5 +456,13 @@ if(!function_exists('generate_meta_information'))
             ->image(asset('/Super Tools.png'))
             ->canonical(url('/'));
         return $page_meta;
+    }
+}
+
+if(!function_exists('get_html'))
+{
+    function get_html($section)
+    {
+        return Setting::where('key', $section)->first()->value;
     }
 }
