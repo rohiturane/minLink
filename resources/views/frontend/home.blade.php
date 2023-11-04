@@ -25,6 +25,7 @@
                 <p>This is One of the greatest SEO Tools for your Business</p>
             </div>
             <div class="row">
+                {!! show_ads('youtube_horizontal') !!}
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/youtube-trends')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -221,11 +222,12 @@
                         </div>
                     </a>
                 </div>
+                {!! show_ads('youtube_horizontal_end') !!}
             </div>
         </div>
         <div class="col-lg-3">
             <div id="rightside-bar">
-                <p>Her the is the test which contain ads</p>
+                {!! show_ads('youtube_vertical') !!}
             </div>
         </div>
     </div>
@@ -238,6 +240,7 @@
                 <p>This is One of the greatest SEO Tools for your Business</p>
             </div>
             <div class="row">
+                {!! show_ads('seo_horizontal') !!}
                 <!-- <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/google-page-speed')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -448,11 +451,12 @@
                         </div>
                     </a>
                 </div>
+                {!! show_ads('seo_horizontal_end') !!}
             </div>
         </div>
         <div class="col-lg-3">
             <div id="rightside-bar">
-                <p>Her the is the test which contain ads</p>
+                {!! show_ads('seo_vertical') !!}
             </div>
         </div>
     </div>
@@ -465,6 +469,7 @@
                 <p>This is One of the greatest Image Tools for your Business</p>
             </div>
             <div class="row">
+                {!! show_ads('image_horizontal') !!}
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/jpg-to-png-generator')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -597,11 +602,12 @@
                         </div>
                     </a>
                 </div>
+                {!! show_ads('image_horizontal_end') !!}
             </div>
         </div>
         <div class="col-lg-3">
             <div id="rightside-bar">
-                <p>Her the is the test which contain ads</p>
+                {!! show_ads('image_vertical') !!}
             </div>
         </div>
     </div>
@@ -614,6 +620,7 @@
                 <p>This is One of the greatest Developer Tools for your Business</p>
             </div>
             <div class="row">
+                {!! show_ads('developer_horizontal') !!}
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/csv-to-json-converter')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -759,12 +766,12 @@
                         </div>
                     </a>
                 </div>
-                
+                {!! show_ads('developer_horizontal_end') !!}
             </div>
         </div>
         <div class="col-lg-3">
             <div id="rightside-bar">
-                <p>Her the is the test which contain ads</p>
+                {!! show_ads('developer_vertical') !!}
             </div>
         </div>
     </div>

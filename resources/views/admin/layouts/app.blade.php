@@ -68,13 +68,22 @@
                 <span class="hide-menu">Page Information</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/admin/advertise')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-ad-2"></i>
+                </span>
+                <span class="hide-menu">Advertise</span>
+              </a>
+            </li>
             <div class="fixed-bottom">
-            <li class="" style="padding: 0px 24px;">
-              <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/admin/optimize-app')}}">Optimize Application</a>
-            </li>
-            <li  style="padding: 0px 24px;">
-              <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/admin/generate/sitemap')}}">Generate Sitemap</a>
-            </li>
+              <li class="" style="padding: 0px 24px;">
+                <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/admin/optimize-app')}}">Optimize Application</a>
+              </li>
+              <li  style="padding: 0px 24px;">
+                <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/admin/generate/sitemap')}}">Generate Sitemap</a>
+              </li>
+            </div>
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -134,14 +143,14 @@
     </div>
   </div>
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div id="toast_message" class="toast-body">
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
+      <div id="liveToast" class="toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+              <div id="toast_message" class="toast-body">
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+      </div>
+  </div>
   <script src="{{ asset('/libs/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{ asset('/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{ asset('/js/sidebarmenu.js')}}"></script>
@@ -167,7 +176,7 @@
     $(function() {
             <?php if (session()->get('status') == 'error') { ?>
                 generateToast("text-bg-danger", "{{ session()->get('message') }}");
-            <?php } if(session()->get('status') == 'success') { ?>
+            <?php } else if(session()->get('status') == 'success') { ?>
                 generateToast("text-bg-primary", "{{ session()->get('message') }}");
             <?php } else if(session()->get('status')) {
                 session()->forgot('status');

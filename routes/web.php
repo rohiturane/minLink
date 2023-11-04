@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdsController;
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
@@ -124,4 +125,12 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
 
     Route::get('/generate/sitemap',[HomeController::class,'generateSiteMap']);
     Route::get('/optimize-app', [HomeController::class, 'optimizeApplication']);
+
+    // Advertise
+    Route::get('/advertise',[AdsController::class, 'index']);
+    Route::get('/advertise/create', [AdsController::class, 'create']);
+    Route::post('/advertise/store', [AdsController::class,'store']);
+    Route::get('/advertise/{id}/edit',[AdsController::class, 'edit']);
+    Route::post('/advertise/{id}/update',[AdsController::class,'update']);
+    Route::get('/advertise/{id}/delete',[AdsController::class,'delete']);
 });

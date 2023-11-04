@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Ads;
 use App\Models\PageInformation;
 use App\Models\Setting;
 use Melbahja\Seo\MetaTags;
@@ -464,5 +465,20 @@ if(!function_exists('get_html'))
     function get_html($section)
     {
         return Setting::where('key', $section)->first()->value;
+    }
+}
+
+if(!function_exists('show_ads'))
+{
+    function show_ads($section)
+    {
+        $ad = Ads::where('ads_slug','like', $section)->where('status',1)->first();
+        
+        if(!empty($ad->image))
+        {
+            return '<img src="'.$ad->image.'" class="img-fluid pb-3">';
+        }
+
+        return empty($ad->external_html) ? '' : $ad->external_html;
     }
 }
