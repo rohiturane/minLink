@@ -3,6 +3,7 @@
 use App\Models\Ads;
 use App\Models\PageInformation;
 use App\Models\Setting;
+use Illuminate\Support\Str;
 use Melbahja\Seo\MetaTags;
 
 if(!function_exists('curl_call'))
@@ -480,5 +481,13 @@ if(!function_exists('show_ads'))
         }
 
         return empty($ad->external_html) ? '' : $ad->external_html;
+    }
+}
+
+if(!function_exists('short_description'))
+{
+    function short_description($text, $limit)
+    {
+        return Str::words(strip_tags($text), $limit, ' ...');
     }
 }

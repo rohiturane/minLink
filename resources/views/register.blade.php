@@ -68,11 +68,13 @@
   <script src="{{ asset('/libs/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{ asset('/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   @php
-        $setting = Cache::get('setting');
-            
+  $setting = '';
+        if(!empty(Cache::get('setting'))) {
+          $setting = Cache::get('setting');
+        }
         if(empty($setting)) {
             $setting = Cache::rememberForever('setting', function () {
-                return Setting::get();
+                return \App\Models\Setting::get();
             });
         }
         $api_key = find_object($setting, 'google_capatch_site_key');

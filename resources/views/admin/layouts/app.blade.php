@@ -159,6 +159,7 @@
   <script src="{{ asset('/libs/simplebar/dist/simplebar.js')}}"></script>
   <script src="{{ asset('/js/dashboard.js')}}"></script>
   <script src="{{ asset('/js/custom.js')}}"></script>
+  @stack('custom-scripts')
   @php
         $setting = Cache::get('setting');
             

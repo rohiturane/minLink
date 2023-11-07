@@ -93,6 +93,9 @@ Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy']);
 Route::get('/terms-of-service',[HomeController::class, 'termsService']);
 Route::get('/contact-us',[HomeController::class, 'contactUs']);
 
+Route::get('/posts', [BlogController::class, 'frontendBlogList']);
+Route::get('/post/{slug}', [BlogController::class, 'postDetails']);
+
 // Subscription
 Route::post('/auth/add-subscription', [HomeController::class, 'addSubscription']);
 
@@ -110,6 +113,10 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     // blog
     Route::get('/posts',[BlogController::class, 'index']);
     Route::get('/post/create', [BlogController::class, 'create']);
+    Route::post('/post/store',[BlogController::class,'store']);
+    Route::get('/post/{id}/edit', [BlogController::class,'edit']);
+    Route::post('/post/{id}/update', [BlogController::class,'update']);
+    Route::get('/post/{id}/delete',[BlogController::class,'delete']);
 
     //setting
     Route::get('/setting', [HomeController::class, 'setting']);

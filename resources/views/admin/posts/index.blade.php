@@ -53,8 +53,10 @@
                                         <div class="d-flex align-items-center gap-2">
                                             @if($post->status==1)
                                             <span class="badge bg-primary rounded-3 fw-semibold">Published</span>
-                                            @else 
+                                            @elseif($post->status == 0)
                                             <span class="badge bg-secondary rounded-3 fw-semibold">Draft</span>
+                                            @else 
+                                            <span class="badge bg-danger rounded-3 fw-semibold">InActive</span>
                                             @endif
                                         </div>
                                     </td>
@@ -62,10 +64,10 @@
                                         <h6 class="fw-semibold mb-0 fs-4">{{$post->user->name}}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <a href="{{ url('/admin/post/'.$meta->id.'/edit')}}"><span>
+                                        <a href="{{ url('/admin/post/'.$post->id.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
                                             </span></a>
-                                        <a href="{{ url('/admin/post/'.$meta->id.'/delete')}}"><span>
+                                        <a href="{{ url('/admin/post/'.$post->id.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
                                     </td>
