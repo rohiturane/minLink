@@ -10,6 +10,7 @@ use App\Models\Setting;
 use Melbahja\Seo\Sitemap;
 use Melbahja\Seo\Ping;
 use App\Models\Post;
+use App\Models\Tool;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -27,7 +28,11 @@ class HomeController extends Controller
             return Setting::get();
         });
 
-        return view('frontend.home',compact('page_info','page_meta'));
+        $tools = Cache::rememberForever('tools', function() {
+            return Tool::where('status', 1)->get();
+        });
+        
+        return view('frontend.home',compact('page_info','page_meta','tools'));
     }
 
     public function addSubscription(Request $request)

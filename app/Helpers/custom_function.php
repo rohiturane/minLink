@@ -3,6 +3,7 @@
 use App\Models\Ads;
 use App\Models\PageInformation;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Melbahja\Seo\MetaTags;
 
@@ -489,5 +490,39 @@ if(!function_exists('short_description'))
     function short_description($text, $limit)
     {
         return Str::words(strip_tags($text), $limit, ' ...');
+    }
+}
+
+if(!function_exists('related_tools'))
+{
+    function related_tools($section)
+    {
+        $tools = Cache::get('tools');
+        
+        $html = '<div class="pt-3">
+                    <h3>Related Tools</h3>';
+        $related_tools = $tools->filter(function($item) use($section){
+            return $item->section == $section;
+        });
+        $tools = $related_tools->take(6);
+        
+        foreach($tools as $tool)
+        {
+            $html.='<div class="col-12 col-md-6 col-lg-4 mb-3">
+                <a class="card text-decoration-none cursor-pointer item-box" href="'.url($tool->link).'">
+                    <div class="card-body align-items-center d-flex justify-content-center">
+                        <div class="d-flex align-items-center">
+                            <img class="avatar rounded-0 lazyloaded" src="'.$tool->image.'">
+                            <div class="name ps-3">
+                                <div class="font-weight-medium tool-name">'.$tool->name.'</div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>';
+        }
+        $html.= '</div>';
+
+        return $html;
     }
 }

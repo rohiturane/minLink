@@ -39,7 +39,18 @@
                 </div>
             </div>
             @endif
+            <div class="related_tools">
+                {!! related_tools('1') !!}
+            </div>
         </div>
+        <div class="col-lg-3 col-12">
+          {!! show_ads('youtube_vertical') !!}
+        </div>
+    </div>
+</div>
+<div class="row px-5 py-4">
+    <div class="page-information">
+      {!! empty($page_info['html_content']) ? '' : $page_info['html_content'] !!}
     </div>
 </div>
 <script>

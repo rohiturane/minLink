@@ -76,6 +76,14 @@
                 <span class="hide-menu">Advertise</span>
               </a>
             </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/admin/tools')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-tools"></i>
+                </span>
+                <span class="hide-menu">Tool</span>
+              </a>
+            </li>
             <div class="fixed-bottom">
               <li class="" style="padding: 0px 24px;">
                 <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/admin/optimize-app')}}">Optimize Application</a>

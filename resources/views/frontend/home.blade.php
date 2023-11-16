@@ -17,6 +17,21 @@
         </div>
     </div>
 </div>
+@php
+    $youtube_tools = $tools->filter(function($item) {
+        return $item->section == 1;
+    });
+    $seo_tools = $tools->filter(function($item) {
+        return $item->section == 2;
+    });
+    $image_tools = $tools->filter(function($item) {
+        return $item->section == 3;
+    });
+    $developer_tools = $tools->filter(function($item) {
+        return $item->section == 4;
+    });
+@endphp
+@if(!$youtube_tools->isEmpty())
 <div class="main-content bg-white mt-4" style="padding-left: 30px;">
     <div class="row">
         <div class="p-4 col-lg-9 col-12">
@@ -26,6 +41,21 @@
             </div>
             <div class="row">
                 {!! show_ads('youtube_horizontal') !!}
+                
+                @foreach($youtube_tools as $tool)
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <div class="d-flex align-items-center">
+                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <div class="name ps-3">
+                                        <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/youtube-trends')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -232,6 +262,8 @@
         </div>
     </div>
 </div>   
+@endif
+@if(!$seo_tools->isEmpty())
 <div class="main-content bg-aliceblue mt-4" style="padding-left: 30px;">
     <div class="row">
         <div class="p-4 col-lg-9 col-12">
@@ -241,6 +273,20 @@
             </div>
             <div class="row">
                 {!! show_ads('seo_horizontal') !!}
+                @foreach($seo_tools as $tool)
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <div class="d-flex align-items-center">
+                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <div class="name ps-3">
+                                        <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
                 <!-- <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/google-page-speed')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -461,6 +507,8 @@
         </div>
     </div>
 </div>  
+@endif
+@if(!$image_tools->isEmpty())
 <div class="main-content bg-white mt-4" style="padding-left: 30px;">
     <div class="row">
         <div class="p-4 col-lg-9 col-12">
@@ -470,6 +518,20 @@
             </div>
             <div class="row">
                 {!! show_ads('image_horizontal') !!}
+                @foreach($image_tools as $tool)
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <div class="d-flex align-items-center">
+                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <div class="name ps-3">
+                                        <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/jpg-to-png-generator')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -612,6 +674,8 @@
         </div>
     </div>
 </div>  
+@endif
+@if(!$developer_tools->isEmpty())
 <div class="main-content bg-aliceblue mt-4" style="padding-left: 30px;">
     <div class="row">
         <div class="p-4 col-lg-9 col-12">
@@ -621,6 +685,20 @@
             </div>
             <div class="row">
                 {!! show_ads('developer_horizontal') !!}
+                @foreach($developer_tools as $tool)
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <div class="d-flex align-items-center">
+                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <div class="name ps-3">
+                                        <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
                 <div class="col-12 col-md-6 col-lg-4 mb-3">
                     <a class="card text-decoration-none cursor-pointer item-box" href="{{url('/csv-to-json-converter')}}">
                         <div class="card-body align-items-center d-flex justify-content-center">
@@ -776,4 +854,5 @@
         </div>
     </div>
 </div> 
+@endif
 @endsection

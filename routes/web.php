@@ -9,6 +9,7 @@ use App\Http\Controllers\SEOController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ToolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -140,4 +141,12 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function 
     Route::get('/advertise/{id}/edit',[AdsController::class, 'edit']);
     Route::post('/advertise/{id}/update',[AdsController::class,'update']);
     Route::get('/advertise/{id}/delete',[AdsController::class,'delete']);
+
+    // Tools
+    Route::get('/tools', [ToolController::class, 'index']);
+    Route::get('/tool/create', [ToolController::class, 'create']);
+    Route::post('/tool/store', [ToolController::class, 'store']);
+    Route::get('/tool/{id}/edit',[ToolController::class,'edit']);
+    Route::post('/tool/{id}/update',[ToolController::class, 'update']);
+    Route::get('/tool/{id}/delete',[ToolController::class,'delete']);
 });
