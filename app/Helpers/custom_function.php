@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Melbahja\Seo\MetaTags;
+use App\Models\Tool;
 
 if(!function_exists('curl_call'))
 {
@@ -498,7 +499,11 @@ if(!function_exists('related_tools'))
     function related_tools($section)
     {
         $tools = Cache::get('tools');
-        
+        if(!Cache::has('tools')) {
+            $tools = Cache::rememberForever('tools', function() {
+                return Tool::where('status', 1)->get();
+            });
+        }
         $html = '<div class="pt-3">
                     <h3>Related Tools</h3>';
         $related_tools = $tools->filter(function($item) use($section){
