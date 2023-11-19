@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
-@include('frontend.layouts.common',['title' => 'Youtube Channel Statistics'])
+@include('frontend.layouts.common',['title' => 'Youtube Money Calculator'])
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <div class="main-content bg-white mt-4" style="padding-left: 30px;">
     <div class="row">

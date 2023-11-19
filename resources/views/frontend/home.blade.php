@@ -62,7 +62,7 @@
                             <div class="d-flex align-items-center">
                                 <img class="avatar rounded-0 lazyloaded" src="{{ asset('img/trending (1).png')}}">
                                 <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">YouTube Trend</div>
+                                    <div class="font-weight-medium tool-name">YouTube Trends</div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                             <div class="d-flex align-items-center">
                             <img class="avatar rounded-0 lazyloaded" src="{{ asset('img/price-tag (1).png')}}">
                                 <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">YouTube Tag Extractor</div>
+                                    <div class="font-weight-medium tool-name">YouTube Tags Extractor</div>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                             <div class="d-flex align-items-center">
                             <img class="avatar rounded-0 lazyloaded" src="{{ asset('img/tag (1).png')}}">
                                 <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">YouTube Tag Generator</div>
+                                    <div class="font-weight-medium tool-name">YouTube Tags Generator</div>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                             <div class="d-flex align-items-center">
                                 <img class="avatar rounded-0 ls-is-cached lazyloaded" src="{{ asset('img/title.png')}}">
                                 <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">YouTube Title Extractor</div>
+                                    <div class="font-weight-medium tool-name">YouTube Video Title Extractor</div>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                             <div class="d-flex align-items-center">
                                 <img class="avatar rounded-0 lazyloaded" src="{{asset('img/title.png')}}">
                                 <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">YouTube Title Generator</div>
+                                    <div class="font-weight-medium tool-name">YouTube Video Title Generator</div>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                             <div class="d-flex align-items-center">
                                 <img class="avatar rounded-0 lazyloaded" src="{{ asset('img/job-seeking.png')}}">
                                 <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">YouTube Description Extractor</div>
+                                    <div class="font-weight-medium tool-name">YouTube Video Description Extractor</div>
                                 </div>
                             </div>
                         </div>

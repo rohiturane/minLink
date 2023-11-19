@@ -49,7 +49,7 @@ class ToolController extends Controller
         {
             $imageName = time().'.'.$request->image->extension();
             $path = '/img/'.$imageName;
-            dd($path);
+            
             $request->image->move(public_path('img'), $imageName);
         }
 
@@ -79,7 +79,6 @@ class ToolController extends Controller
 
         $validate = Validator::make($input_array, [
             'name' => 'required',
-            'image' => 'required',
             'section' => 'required',
             'link' => 'required',
         ]);

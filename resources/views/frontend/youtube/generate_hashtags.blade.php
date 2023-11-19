@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
-@include('frontend.layouts.common',['title' => 'Youtube Hashtag Generator'])
+@include('frontend.layouts.common',['title' => 'Youtube Hashtags Generator'])
 <div class="main-content bg-white mt-4" style="padding-left: 30px;">
     <div class="row">
         <div class="p-4 col-lg-8 col-12">
