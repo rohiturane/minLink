@@ -505,7 +505,7 @@ if(!function_exists('related_tools'))
             });
         }
         $html = '<div class="pt-3">
-                    <h3>Related Tools</h3>';
+                    <h3>Related Tools</h3> <div class="row">';
         $related_tools = $tools->filter(function($item) use($section){
             return $item->section == $section;
         });
@@ -526,7 +526,7 @@ if(!function_exists('related_tools'))
                 </a>
             </div>';
         }
-        $html.= '</div>';
+        $html.= '</div></div>';
 
         return $html;
     }
