@@ -38,7 +38,7 @@
                 <button type="button" class="btn btn-sm bg-danger text-white rounded-5 px-sm-3" onclick="resetForm()">Reset</button>
             @endif
             <div class="related_tools">
-                {!! related_tools('1') !!}
+                {!! related_tools('1', 'Youtube Video Title Generator') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

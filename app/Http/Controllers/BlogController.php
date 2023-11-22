@@ -174,7 +174,7 @@ class BlogController extends Controller
     public function frontendBlogList(Request $request)
     {
         $page_meta = [];
-        $page_info = fetch_meta_information('blog-page');
+        $page_info = fetch_meta_information('blogs');
         
         if(!empty($page_info)) {
             $page_meta = generate_meta_information($page_info);

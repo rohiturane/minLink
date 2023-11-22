@@ -18,7 +18,7 @@
             </form>
             
             <div class="related_tools">
-                {!! related_tools('3') !!}
+                {!! related_tools('3', 'JPG to Webp Converter') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

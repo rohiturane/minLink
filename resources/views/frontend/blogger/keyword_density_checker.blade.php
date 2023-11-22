@@ -42,7 +42,7 @@
             </div>
             @endif
             <div class="related_tools">
-                {!! related_tools('2') !!}
+                {!! related_tools('2', 'Keyword Density Checker') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

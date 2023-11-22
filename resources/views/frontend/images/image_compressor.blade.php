@@ -21,7 +21,7 @@
                 </div>
             </form>
             <div class="related_tools">
-                {!! related_tools('3') !!}
+                {!! related_tools('3', 'Image Compressor') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

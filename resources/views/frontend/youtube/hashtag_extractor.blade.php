@@ -29,7 +29,7 @@
             </div>
             @endif
             <div class="related_tools">
-                {!! related_tools('1') !!}
+                {!! related_tools('1','Youtube Hashtags Extractor') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

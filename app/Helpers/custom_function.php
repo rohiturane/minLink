@@ -496,7 +496,7 @@ if(!function_exists('short_description'))
 
 if(!function_exists('related_tools'))
 {
-    function related_tools($section)
+    function related_tools($section, $expect)
     {
         $tools = Cache::get('tools');
         if(!Cache::has('tools')) {
@@ -509,7 +509,7 @@ if(!function_exists('related_tools'))
         $related_tools = $tools->filter(function($item) use($section){
             return $item->section == $section;
         });
-        $tools = $related_tools->take(6);
+        $tools = $related_tools->where('name','!=',$expect)->random(6);
         
         foreach($tools as $tool)
         {

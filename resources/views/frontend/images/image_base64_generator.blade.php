@@ -29,7 +29,7 @@
             </div>
             @endif
             <div class="related_tools">
-                {!! related_tools('3') !!}
+                {!! related_tools('3', 'Image to Base64 Converter') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

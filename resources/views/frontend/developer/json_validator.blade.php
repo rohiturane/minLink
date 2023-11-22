@@ -32,7 +32,7 @@
                 @endif
             @endif
             <div class="related_tools">
-                {!! related_tools('4') !!}
+                {!! related_tools('4', 'JSON Validator') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">

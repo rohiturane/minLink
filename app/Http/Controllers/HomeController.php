@@ -228,16 +228,35 @@ class HomeController extends Controller
 
     public function privacyPolicy()
     {
-        return view('frontend.privacy-policy');
+        $page_meta = [];
+        $page_info = fetch_meta_information('privacy-policy');
+        
+        if(!empty($page_info)) {
+            $page_meta = generate_meta_information($page_info);
+        }
+
+        return view('frontend.privacy-policy', compact('page_meta','page_info'));
     }
 
     public function termsService()
     {
-        return view('frontend.terms-of-service');
+        $page_meta = [];
+        $page_info = fetch_meta_information('terms-of-service');
+        
+        if(!empty($page_info)) {
+            $page_meta = generate_meta_information($page_info);
+        }
+        return view('frontend.terms-of-service', compact('page_meta','page_info'));
     }
 
     public function contactUs(Request $request)
     {
-        return view('frontend.contact-us');
+        $page_meta = [];
+        $page_info = fetch_meta_information('contact-us');
+        
+        if(!empty($page_info)) {
+            $page_meta = generate_meta_information($page_info);
+        }
+        return view('frontend.contact-us', compact('page_meta','page_info'));
     }
 }

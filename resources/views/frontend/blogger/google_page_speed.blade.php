@@ -27,7 +27,7 @@
             </div>
             @endif
             <div class="related_tools">
-                {!! related_tools('2') !!}
+                {!! related_tools('2', 'Google PageSpeed Checker') !!}
             </div>
         </div>
         <div class="col-lg-3 col-12">
