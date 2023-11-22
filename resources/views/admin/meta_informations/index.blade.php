@@ -8,7 +8,7 @@
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$metas->isEmpty())
-                        <table class="table text-nowrap mb-0 align-middle">
+                        <table id="example" class="table text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
                                 <tr>
                                     <th class="border-bottom-0">
@@ -35,7 +35,7 @@
                                         <h6 class="fw-semibold mb-1">{{ $meta->page_slug }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $meta->meta_title }}</p>
+                                        <p class="mb-0 fw-normal text-wrap">{{ $meta->meta_title }}</p>
                                     </td>
                                     <td class="border-bottom-0">
                                         <a href="{{ url('/admin/page_information/'.$meta->id.'/edit')}}"><span>
@@ -63,3 +63,12 @@
     </div>
 </div>
 @endsection
+@push('custom-scripts')
+<script src="{{ asset('/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('/js/dataTables.bootstrap5.min.js')}}"></script>
+<script>
+    $(function(){
+        new DataTable('#example');
+    });
+</script>
+@endpush

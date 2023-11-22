@@ -8,7 +8,7 @@
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$posts->isEmpty())
-                        <table class="table text-nowrap mb-0 align-middle">
+                        <table id="example" class="table text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
                                 <tr>
                                     <th class="border-bottom-0">
@@ -41,7 +41,7 @@
                                         <h6 class="fw-semibold mb-0">{{ ++$key }}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1">{{ $post->title }}</h6>
+                                        <p class="fw-semibold mb-1 text-wrap">{{ $post->title }}</p>
                                     </td>
                                     <td class="border-bottom-0">
                                         <p class="mb-0 fw-normal">{{ $post->category }}</p>
@@ -90,3 +90,12 @@
     </div>
 </div>
 @endsection
+@push('custom-scripts')
+<script src="{{ asset('/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('/js/dataTables.bootstrap5.min.js')}}"></script>
+<script>
+    $(function(){
+        new DataTable('#example');
+    });
+</script>
+@endpush
