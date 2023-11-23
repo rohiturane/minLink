@@ -18,6 +18,9 @@
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" class="form-control" id="title" value="{{ empty($post) ? '' : $post->title }}" name="title" aria-describedby="emailHelp">
+                        @if($errors->has('title'))
+                            <span class="text-danger">{{ $errors->first('title');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="title" class="form-label">Slug</label>
@@ -59,6 +62,9 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">HTML Content</label>
                         <textarea id="editor" name="html" rows="8">{{ empty($post) ? '' : $post->html }}</textarea>
+                        @if($errors->has('html'))
+                            <span class="text-danger">{{ $errors->first('html');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Featured Image</label>

@@ -17,6 +17,9 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Ad Slug</label>
                         <input type="text" class="form-control" name="ads_slug" value="{{ empty($ad) ? '' : $ad->ads_slug }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        @if($errors->has('ads_slug'))
+                            <span class="text-danger ">{{ $errors->first('ads_slug');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Image</label>

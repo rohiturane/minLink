@@ -17,15 +17,24 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>
                         <input type="text" class="form-control" name="name" value="{{ empty($tool) ? '' : $tool->name }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        @if($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Image</label>
                         <input type="file" name="image" id="image" class="form-control">
                         @if(!empty($tool->image))<span>{{$tool->image}}</span>@endif
+                        @if($errors->has('image'))
+                            <span class="text-danger">{{ $errors->first('image');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Link</label>
                         <input type="text" class="form-control" name="link" value="{{ empty($tool) ? '' : $tool->link }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        @if($errors->has('link'))
+                            <span class="text-danger">{{ $errors->first('link');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Section</label>
@@ -35,6 +44,9 @@
                             <option value="3" {{ empty($tool) ? '' : ( $tool->section==3 ? 'selected' : '')}}>Image Section</option>
                             <option value="4" {{ empty($tool) ? '' : ( $tool->section==4 ? 'selected' : '')}}>Developer Section</option>
                         </select>
+                        @if($errors->has('section'))
+                            <span class="text-danger">{{ $errors->first('section');}}</span>
+                        @endif
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
