@@ -27,6 +27,13 @@
                         @if(!empty($ad->image))<span>{{$ad->image}}</span>@endif
                     </div>
                     <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Ad Link</label>
+                        <input type="text" class="form-control" name="link" value="{{ empty($ad) ? '' : $ad->link }}" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        @if($errors->has('link'))
+                            <span class="text-danger ">{{ $errors->first('link');}}</span>
+                        @endif
+                    </div>
+                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Status</label>
                         <select class="form-select" name="status">
                             <option value="2" {{ empty($ad) ? '' : ($ad->status == 2 ? 'selected': '')}}>Draft</option>

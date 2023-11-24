@@ -9,6 +9,6 @@ class Ads extends Model
     protected $table = 'ads';
 
     protected $fillable = [
-        'ads_slug', 'image', 'external_html', 'status'
+        'ads_slug', 'image', 'external_html', 'status', 'link'
     ];
 }

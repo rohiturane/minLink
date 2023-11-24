@@ -44,6 +44,7 @@ class AdsController extends Controller
         Ads::create([
             'ads_slug' => $input_array['ads_slug'],
             'image' => $path,
+            'link' => $input_array['link'],
             'external_html' => empty($input_array['external_html']) ? NULL : $input_array['external_html'],
             'status' => $input_array['status']
         ]);
@@ -92,6 +93,7 @@ class AdsController extends Controller
         $ads->ads_slug = $input_array['ads_slug'];
         $ads->external_html = empty($input_array['external_html']) ? NULL: $input_array['external_html'];
         $ads->status = $input_array['status'];
+        $ads->link = $input_array['link'];
         $ads->save();
 
         session()->flash('status','success');

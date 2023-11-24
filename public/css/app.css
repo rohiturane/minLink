@@ -358,3 +358,10 @@ img {
   .related_tools {
     padding-top: 30px;
   }
+  #rightside-bar {
+    margin-top: 110px;
+  }
+  .page-information {
+    padding-left: 50px;
+    padding-right: 60px;
+  }

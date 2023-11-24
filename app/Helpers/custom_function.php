@@ -479,7 +479,7 @@ if(!function_exists('show_ads'))
         
         if(!empty($ad->image))
         {
-            return '<img src="'.$ad->image.'" class="img-fluid pb-3">';
+            return '<a target="_blank" href="'.$ad->link.'"><img src="'.$ad->image.'" class="img-fluid pb-3"></a>';
         }
 
         return empty($ad->external_html) ? '' : $ad->external_html;

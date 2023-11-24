@@ -81,6 +81,9 @@
                         {{Auth::user()->name}}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        @if(auth()->user()->role == 1)
+                        <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}">Dashboard</a></li>
+                        @endif
                         <li><a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('form-logout').submit();" href="#">Logout</a></li>
                         <form id="form-logout" action="{{ url('/logout') }}" method="POST" style="display: none;">
                           {{ csrf_field() }}
