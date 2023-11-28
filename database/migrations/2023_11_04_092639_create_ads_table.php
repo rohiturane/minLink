@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('ads_slug')->nullable();
             $table->string('image')->nullable();
-            $table->string('external_html')->nullable();
+            $table->text('external_html')->nullable();
             $table->boolean('status')->nullable();
             $table->timestamps();
         });

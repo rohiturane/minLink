@@ -479,12 +479,13 @@ if(!function_exists('show_ads'))
         
         if(!empty($ad->image))
         {
-            return '<a target="_blank" href="'.$ad->link.'"><img src="'.$ad->image.'" class="img-fluid pb-3"></a>';
+            return '<div class=" d-flex align-items-center justify-content-center"><a target="_blank" href="'.$ad->link.'"><img src="'.$ad->image.'" class="img-fluid pb-3"></a></div>';
         }
 
-        return empty($ad->external_html) ? '' : $ad->external_html;
+        return empty($ad->external_html) ? '' : '<div class="d-flex align-items-center justify-content-center pb-3">'.$ad->external_html.'</div>';
     }
 }
+
 
 if(!function_exists('short_description'))
 {
