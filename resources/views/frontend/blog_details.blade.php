@@ -3,7 +3,6 @@
 <style>
     .card {
         height: auto;
-        pointer-events:none;
     }
 </style>
 <div style="height: 100px;"></div>
