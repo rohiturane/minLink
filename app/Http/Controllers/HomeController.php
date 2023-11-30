@@ -186,12 +186,12 @@ class HomeController extends Controller
             $array_list = array_slice(array_values(array_unique($res->toArray())),2);
 
             $blogs = Post::where('status','1')->get();
-            $sitemap->links('blog.xml', function($map) use ($blogs)
+            $sitemap->links(['name' => 'blog.xml', 'images' => true], function($map) use ($blogs)
             {
                 $map->loc('/blog')->freq('daily')->priority('0.8');
                 foreach($blogs as $blog)
                 {
-                    $map->loc('/blog/'.$blog->slug)->freq('weekly')->lastMod($blog->updated_at)->image(asset('/blog/'.$blog->featured_image), ['caption' => $blog->title]);
+                    $map->loc('/blog/'.$blog->slug)->freq('weekly')->lastMod($blog->updated_at)->image(asset($blog->featured_image), ['caption' => $blog->title]);
                 }
             });
             $sitemap->links('page.xml', function($map) use ($array_list)
@@ -208,6 +208,8 @@ class HomeController extends Controller
             
             $ping = new Ping;
             $ping->send(url('/').'/sitemap.xml');
+            session()->flash('status','success');
+            session()->flash('message', 'Sitemap generated successfully');
             return back();
         } 
         catch(\Exception $e)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +10,7 @@ use App\Services\SEOService;
 use App\Services\CountryService;
 use Iodev\Whois\Factory as Whois;
 use Html2Text\Html2Text;
+use Illuminate\Support\Facades\Cache;
 
 class SEOController extends Controller
 {
@@ -698,5 +699,100 @@ class SEOController extends Controller
         }
 
         return view('frontend.blogger.malware_checker', compact('page_info','page_meta'));
+    }
+
+    public function mozInitialize($data)
+    {
+        $setting = '';
+        if(!empty(Cache::get('setting'))) {
+          $setting = Cache::get('setting');
+        }
+        if(empty($setting)) {
+            $setting = Cache::rememberForever('setting', function () {
+                return Setting::get();
+            });
+        }
+        $access_id = find_object($setting, 'moz_access_id');
+        $secret_key = find_object($setting, 'moz_secret_key');
+
+        $expires = time() + 300;
+
+        // Put each parameter on a new line.
+        $stringToSign = $access_id."\n".$expires;
+
+        // Get the "raw" or binary output of the hmac hash.
+        $binarySignature = hash_hmac('sha1', $stringToSign, $secret_key, true);
+
+        // Base64-encode it and then url-encode that.
+        $urlSafeSignature = urlencode(base64_encode($binarySignature));
+
+        $cols = "103079233568";
+        
+        $url = "http://lsapi.seomoz.com/linkscape/url-metrics/".urlencode($data['link'])."?Cols=".$cols."&AccessID=".$access_id."&Expires=".$expires."&Signature=".$urlSafeSignature;
+        
+        return $url;
+    }
+
+    public function dapaChecker(Request $request)
+    {
+        $input_array = $request->all();
+
+        $page_meta = [];
+        $page_info = fetch_meta_information('da-pa-checker');
+        
+        if(!empty($page_info)) {
+            $page_meta = generate_meta_information($page_info);
+        }
+
+        if(!empty($input_array))
+        {
+            $url = $this->mozInitialize($input_array);
+         
+            $get_source = curl_call($url, 'get', []);
+
+            $deJson = json_decode($get_source, true);
+
+            if ( !empty($deJson) ) {
+
+                $data['link']             = $input_array['link'];
+                $data['domain_authority'] = ( $deJson['pda'] ) ? round($deJson['pda']) : 'None';
+                $data['page_authority'] = ( $deJson['upa'] ) ? round($deJson['upa']) : 'None';
+                $data['linking_domains']  = ( $deJson['ueid'] ) ? formatNumber($deJson['ueid']) : 'None';
+                $data['total_links']      = ( $deJson['uid'] ) ? formatNumber($deJson['uid']) : 'None';
+            }
+
+            return view('frontend.blogger.dapa_checker', compact('page_info','page_meta','data'));
+        }
+        return view('frontend.blogger.dapa_checker', compact('page_info','page_meta'));
+    }
+
+    public function backlinkChecker(Request $request)
+    {
+        $input_array = $request->all();
+        $page_meta = [];
+        $page_info = fetch_meta_information('backlink-checker');
+        
+        if(!empty($page_info)) {
+            $page_meta = generate_meta_information($page_info);
+        }
+
+        if(!empty($input_array))
+        {
+            $url = $this->mozInitialize($input_array);
+         
+            $get_source = curl_call($url, 'get', []);
+
+            $deJson = json_decode($get_source, true);
+
+            if ( !empty($deJson) ) {
+                $data['link']             = $input_array['link'];
+                $data['domain_authority'] = ( $deJson['pda'] ) ? round($deJson['pda']) : 'None';
+                $data['linking_domains']  = ( $deJson['ueid'] ) ? number_format($deJson['ueid']) : 'None';
+                $data['total_links']      = ( $deJson['uid'] ) ? number_format($deJson['uid']) : 'None';
+            }
+
+            return view('frontend.blogger.backlink_checker', compact('page_info','data','page_meta'));
+        }
+        return view('frontend.blogger.backlink_checker', compact('page_info','page_meta'));
     }
 }

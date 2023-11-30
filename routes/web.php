@@ -61,6 +61,8 @@ Route::get('/terms-of-service-generator',[SEOController::class,'termsOfServiceGe
 Route::get('/lorem-ipsum-generator',[SEOController::class,'loremIpsumGenerator']);
 Route::get('/gzip-enabled-checker',[SEOController::class,'gzipCompressionChecker']);
 Route::get('/malware-checker', [SEOController::class, 'malwareChecker']);
+Route::get('/da-pa-checker',[SEOController::class,'dapaChecker']);
+Route::get('/backlink-checker',[SEOController::class,'backlinkChecker']);
 
 // Image Routes
 Route::any('/jpg-to-png-generator',[ImageController::class,'jpgToPngGenerator']);

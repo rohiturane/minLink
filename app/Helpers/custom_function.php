@@ -479,7 +479,7 @@ if(!function_exists('show_ads'))
         
         if(!empty($ad->image))
         {
-            return '<div class=" d-flex align-items-center justify-content-center"><a target="_blank" href="'.$ad->link.'"><img src="'.$ad->image.'" class="img-fluid pb-3"></a></div>';
+            return '<div class=" d-flex align-items-center justify-content-center"><a target="_blank" rel="sponsored" href="'.$ad->link.'"><img src="'.$ad->image.'" class="img-fluid pb-3"></a></div>';
         }
 
         return empty($ad->external_html) ? '' : '<div class="d-flex align-items-center justify-content-center pb-3">'.$ad->external_html.'</div>';
@@ -530,5 +530,27 @@ if(!function_exists('related_tools'))
         $html.= '</div></div>';
 
         return $html;
+    }
+}
+
+if(!function_exists('formatNumber'))
+{
+    function formatNumber($count, $precision = 2) {
+
+        if ($count < 100000) {
+            // Anything less than a million
+            $n_format = $count;
+        }
+        else if ($count < 1000000) {
+            // Anything less than a million
+            $n_format = number_format($count / 1000) . 'K';
+        } else if ($count < 1000000000) {
+            // Anything less than a billion
+            $n_format = number_format($count / 1000000, $precision) . 'M';
+        } else {
+            // At least a billion
+            $n_format = number_format($count / 1000000000, $precision) . 'B';
+        }
+        return $n_format;
     }
 }

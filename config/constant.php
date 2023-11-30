@@ -220,5 +220,7 @@ return [
     ],
     'google_api_key' => env('GOOGLE_API_KEY','AIzaSyBASqF-qeK6XaieImPHY1kmWh9wr0-xG6M'),
     'google_site_key' => env('RECAPTCHA_SITE_KEY'),
-    'google_secret_key' => env('RECAPTCHA_SECRET_KEY')
+    'google_secret_key' => env('RECAPTCHA_SECRET_KEY'),
+    'moz_access_id' => env('MOZ_ACCESS_ID'),
+    'moz_secret_key' => env('MOZ_SECRET_KEY')
 ];
