@@ -12,9 +12,17 @@ use Melbahja\Seo\Ping;
 use App\Models\Post;
 use App\Models\Tool;
 use Illuminate\Support\Facades\Cache;
+use App\Services\BankService;
 
 class HomeController extends Controller
 {
+    public $service;
+
+    public function __construct(BankService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
         $page_meta = [];
@@ -260,5 +268,32 @@ class HomeController extends Controller
             $page_meta = generate_meta_information($page_info);
         }
         return view('frontend.contact-us', compact('page_meta','page_info'));
+    }
+
+    public function bank_information(Request $request)
+    {
+        $data = $this->service->bankInfo();
+        $input_array = $request->all();
+        if(!empty($input_array))
+        {
+            $dataArray = $this->service->getBankInformation($request->all());
+
+            return view('frontend.bank_informations', compact('data','dataArray'));
+        }
+        return view('frontend.bank_informations', compact('data'));
+    }
+
+    public function bankInfo(Request $request)
+    {
+        $data = $this->service->getBankInformation($request->all());
+
+        return response()->json(['bank_information' => $data]);
+    }
+    
+    public function bankDetails()
+    {
+        $data = $this->service->bankInfo();
+        
+        return response()->json(['status'=>true, 'data' => $data]);
     }
 }

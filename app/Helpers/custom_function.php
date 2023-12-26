@@ -506,27 +506,37 @@ if(!function_exists('related_tools'))
             });
         }
         $html = '<div class="pt-3">
-                    <h3>Related Tools</h3> <div class="row">';
+                    <h3>Related Tools</h3><div class="row pt-3">';
         $related_tools = $tools->filter(function($item) use($section){
             return $item->section == $section;
         });
-        $tools = $related_tools->where('name','!=',$expect)->random(6);
+        $no_tools = $related_tools->where('name','!=',$expect)->count();
         
-        foreach($tools as $tool)
-        {
-            $html.='<div class="col-12 col-md-6 col-lg-4 mb-3">
-                <a class="card text-decoration-none cursor-pointer item-box" href="'.url($tool->link).'">
-                    <div class="card-body align-items-center d-flex justify-content-center">
-                        <div class="d-flex align-items-center">
-                            <img class="avatar rounded-0 lazyloaded" src="'.$tool->image.'">
-                            <div class="name ps-3">
-                                <div class="font-weight-medium tool-name">'.$tool->name.'</div>
+        if(!empty($no_tools)) {
+            if($no_tools > 6){
+                $no_tools = 6;
+            }
+            $tools = $related_tools->where('name','!=',$expect)->random($no_tools); 
+            
+            foreach($tools as $tool)
+            {
+                $html.='<div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <a class="card text-decoration-none cursor-pointer item-box" href="'.url($tool->link).'">
+                        <div class="card-body align-items-center d-flex justify-content-center">
+                            <div class="d-flex align-items-center">
+                                <img class="avatar rounded-0 lazyloaded" src="'.$tool->image.'">
+                                <div class="name ps-3">
+                                    <div class="font-weight-medium tool-name">'.$tool->name.'</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>';
+                    </a>
+                </div>';
+            }
         }
+        
+        
+        
         $html.= '</div></div>';
 
         return $html;

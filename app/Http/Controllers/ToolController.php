@@ -17,7 +17,8 @@ class ToolController extends Controller
             '1' => 'Youtube section',
             '2' => 'SEO Section',
             '3' => 'Image Section',
-            '4' => 'Developer Section'
+            '4' => 'Developer Section',
+            '5' => 'Calculator Section'
         ];
 
         return view('admin.tools.index', compact('tools','section'));

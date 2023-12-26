@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SEOController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/states',[SEOController::class,'getStateList']);
+Route::post('/bank/information',[HomeController::class, 'bankInfo']);
+Route::get('/bank/prerequisite',[HomeController::class,'bankDetails']);

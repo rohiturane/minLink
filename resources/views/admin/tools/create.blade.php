@@ -43,6 +43,7 @@
                             <option value="2" {{ empty($tool) ? '' : ( $tool->section==2 ? 'selected' : '')}}>SEO Section</option>
                             <option value="3" {{ empty($tool) ? '' : ( $tool->section==3 ? 'selected' : '')}}>Image Section</option>
                             <option value="4" {{ empty($tool) ? '' : ( $tool->section==4 ? 'selected' : '')}}>Developer Section</option>
+                            <option value="5" {{ empty($tool) ? '' : ( $tool->section==5 ? 'selected' : '')}}>Calculator Section</option>
                         </select>
                         @if($errors->has('section'))
                             <span class="text-danger">{{ $errors->first('section');}}</span>

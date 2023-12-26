@@ -9,6 +9,7 @@ use App\Http\Controllers\SEOController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\ToolController;
 
 /*
@@ -91,6 +92,10 @@ Route::get('/md5-generator', [DeveloperController::class, 'md5Generator']);
 Route::get('/sha-generator',[DeveloperController::class, 'shaGenerator']);
 Route::get('/bcrypt-generator', [DeveloperController::class,'bcryptGenerator']);
 Route::get('/hash-generator',[DeveloperController::class,'hashGenerator']);
+
+
+// Calculators
+Route::get('/isa-calculator', [CalculatorController::class,'isaCalculator']);
 
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy']);
 Route::get('/terms-of-service',[HomeController::class, 'termsService']);
