@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -368,6 +369,7 @@
             }
         }
     </script>
+     <script src="{{asset('js/lazysizes.min.js')}}" async></script>
     {!! get_html('custom_footer')!!}
 </body>
 

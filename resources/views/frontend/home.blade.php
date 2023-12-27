@@ -49,7 +49,7 @@
                         <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
                             <div class="card-body align-items-center d-flex justify-content-center">
                                 <div class="d-flex align-items-center">
-                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <img class="avatar rounded-0 lazyload" src="{{ asset($tool->image)}}">
                                     <div class="name ps-3">
                                         <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
                                     </div>
@@ -85,7 +85,7 @@
                         <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
                             <div class="card-body align-items-center d-flex justify-content-center">
                                 <div class="d-flex align-items-center">
-                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <img class="avatar rounded-0 lazyload" src="{{ asset($tool->image)}}">
                                     <div class="name ps-3">
                                         <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
                                     </div>
@@ -120,7 +120,7 @@
                         <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
                             <div class="card-body align-items-center d-flex justify-content-center">
                                 <div class="d-flex align-items-center">
-                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <img class="avatar rounded-0 lazyload" src="{{ asset($tool->image)}}">
                                     <div class="name ps-3">
                                         <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
                                     </div>
@@ -155,7 +155,7 @@
                         <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
                             <div class="card-body align-items-center d-flex justify-content-center">
                                 <div class="d-flex align-items-center">
-                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <img class="avatar rounded-0 lazyload" src="{{ asset($tool->image)}}">
                                     <div class="name ps-3">
                                         <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
                                     </div>
@@ -190,7 +190,7 @@
                         <a class="card text-decoration-none cursor-pointer item-box" href="{{url($tool->link)}}">
                             <div class="card-body align-items-center d-flex justify-content-center">
                                 <div class="d-flex align-items-center">
-                                    <img class="avatar rounded-0 lazyloaded" src="{{ asset($tool->image)}}">
+                                    <img class="avatar rounded-0 lazyload" src="{{ asset($tool->image)}}">
                                     <div class="name ps-3">
                                         <div class="font-weight-medium tool-name">{{ $tool->name }}</div>
                                     </div>
