@@ -481,6 +481,24 @@ class DeveloperController extends Controller
 
         return view('frontend.developer.hash_generator',compact('page_info','page_meta'));
     }
+
+    public function emailValidatorAPI(Request $request)
+    {
+        $input_array = $request->all();
+
+        $validate = Validator::make($input_array, [
+            'emails.*' => 'required|email'
+        ]);
+
+        if($validate->fails())
+        {
+            return response()->json(['status'=> false, 'message'=>$validate->getMessageBag()]);
+        }
+
+        $results = $this->service->emailValidator($input_array);
+
+        return response()->json(['status'=>true, 'results'=> $results]);
+    }
 }
 
  

@@ -16,7 +16,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "melbahja/seo": "^2.1",
-        "mrclay/minify": "^3.0"
+        "mrclay/minify": "^3.0",
+        "stymiee/email-validator": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
