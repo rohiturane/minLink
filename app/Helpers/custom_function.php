@@ -1,12 +1,10 @@
 <?php
 
-use App\Models\Ads;
 use App\Models\PageInformation;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Melbahja\Seo\MetaTags;
-use App\Models\Tool;
 
 if(!function_exists('curl_call'))
 {
@@ -471,21 +469,6 @@ if(!function_exists('get_html'))
     }
 }
 
-if(!function_exists('show_ads'))
-{
-    function show_ads($section)
-    {
-        $ad = Ads::where('ads_slug','like', $section)->where('status',1)->first();
-        
-        if(!empty($ad->image))
-        {
-            return '<div class=" d-flex align-items-center justify-content-center"><a target="_blank" rel="sponsored" href="'.$ad->link.'"><img src="'.$ad->image.'" alt="'.$section.'" class="img-fluid lazyload pb-3"></a></div>';
-        }
-
-        return empty($ad->external_html) ? '' : '<div class="d-flex align-items-center justify-content-center pb-3">'.$ad->external_html.'</div>';
-    }
-}
-
 
 if(!function_exists('short_description'))
 {
@@ -495,53 +478,6 @@ if(!function_exists('short_description'))
     }
 }
 
-if(!function_exists('related_tools'))
-{
-    function related_tools($section, $expect)
-    {
-        $tools = Cache::get('tools');
-        if(!Cache::has('tools')) {
-            $tools = Cache::rememberForever('tools', function() {
-                return Tool::where('status', 1)->get();
-            });
-        }
-        $html = '<div class="pt-3">
-                    <h3>Related Tools</h3><div class="row pt-3">';
-        $related_tools = $tools->filter(function($item) use($section){
-            return $item->section == $section;
-        });
-        $no_tools = $related_tools->where('name','!=',$expect)->count();
-        
-        if(!empty($no_tools)) {
-            if($no_tools > 6){
-                $no_tools = 6;
-            }
-            $tools = $related_tools->where('name','!=',$expect)->random($no_tools); 
-            
-            foreach($tools as $tool)
-            {
-                $html.='<div class="col-12 col-md-6 col-lg-4 mb-3">
-                    <a class="card text-decoration-none cursor-pointer item-box" href="'.url($tool->link).'">
-                        <div class="card-body align-items-center d-flex justify-content-center">
-                            <div class="d-flex align-items-center">
-                                <img class="avatar rounded-0 lazyload" src="'.$tool->image.'">
-                                <div class="name ps-3">
-                                    <div class="font-weight-medium tool-name">'.$tool->name.'</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>';
-            }
-        }
-        
-        
-        
-        $html.= '</div></div>';
-
-        return $html;
-    }
-}
 
 if(!function_exists('formatNumber'))
 {
