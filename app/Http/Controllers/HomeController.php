@@ -10,17 +10,13 @@ use App\Models\Setting;
 use Melbahja\Seo\Sitemap;
 use Melbahja\Seo\Ping;
 use App\Models\Post;
-use App\Models\Tool;
 use Illuminate\Support\Facades\Cache;
-use App\Services\BankService;
 
 class HomeController extends Controller
 {
-    public $service;
 
-    public function __construct(BankService $service)
+    public function __construct()
     {
-        $this->service = $service;
     }
 
     public function index()
@@ -35,12 +31,8 @@ class HomeController extends Controller
         $settings = Cache::rememberForever('setting', function () {
             return Setting::get();
         });
-
-        $tools = Cache::rememberForever('tools', function() {
-            return Tool::where('status', 1)->get();
-        });
         
-        return view('frontend.home',compact('page_info','page_meta','tools'));
+        return view('frontend.home',compact('page_info','page_meta'));
     }
 
     public function addSubscription(Request $request)
@@ -270,30 +262,4 @@ class HomeController extends Controller
         return view('frontend.contact-us', compact('page_meta','page_info'));
     }
 
-    public function bank_information(Request $request)
-    {
-        $data = $this->service->bankInfo();
-        $input_array = $request->all();
-        if(!empty($input_array))
-        {
-            $dataArray = $this->service->getBankInformation($request->all());
-
-            return view('frontend.bank_informations', compact('data','dataArray'));
-        }
-        return view('frontend.bank_informations', compact('data'));
-    }
-
-    public function bankInfo(Request $request)
-    {
-        $data = $this->service->getBankInformation($request->all());
-
-        return response()->json(['bank_information' => $data]);
-    }
-    
-    public function bankDetails()
-    {
-        $data = $this->service->bankInfo();
-        
-        return response()->json(['status'=>true, 'data' => $data]);
-    }
 }

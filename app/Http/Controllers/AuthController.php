@@ -38,10 +38,6 @@ class AuthController extends Controller
         {
             $request->session()->regenerate();
  
-            if(auth()->user()->role == 1)
-            {
-                return redirect()->intended('admin/dashboard');
-            }
             return redirect()->intended('/');
         }
 
@@ -84,8 +80,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $input_array['name'],
             'email' => $input_array['email'],
-            'password' => bcrypt($input_array['password']),
-            'role' => 2
+            'password' => bcrypt($input_array['password'])
         ]);
 
         return redirect('/login')->with(['message' => 'Your Account has been created successfully.']);

@@ -465,6 +465,7 @@ if(!function_exists('get_html'))
 {
     function get_html($section)
     {
+        return 0;
         return Setting::where('key', $section)->first()->value;
     }
 }
