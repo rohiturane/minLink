@@ -79,7 +79,7 @@ class BlogController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Post saved Successfully');
 
-        return redirect('/admin/posts');
+        return redirect('/posts');
     }
 
     public function edit($id)
@@ -150,7 +150,7 @@ class BlogController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Post updated Successfully');
 
-        return redirect('/admin/posts');
+        return redirect('/posts');
     }
 
     public function delete($id)
@@ -161,14 +161,14 @@ class BlogController extends Controller
             session()->flash('status','success');
             session()->flash('message', 'Something went Wrong!! try again');
 
-            return redirect('/admin/posts');
+            return redirect('/posts');
         }
         $post->delete();
 
         session()->flash('status','success');
         session()->flash('message', 'Post Deleted Successfully');
 
-        return redirect('/admin/posts');
+        return redirect('/posts');
     }
 
     public function frontendBlogList(Request $request)

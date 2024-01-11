@@ -10,9 +10,9 @@
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">{{ empty($post) ? 'Create Post': 'Update Post'}}</h5>
                 @if(empty($post))
-                <form action="{{url('/admin/post/store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('/post/store')}}" method="post" enctype="multipart/form-data">
                 @else
-                <form action="{{url('/admin/post/'.$post->id.'/update')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('/post/'.$post->id.'/update')}}" method="post" enctype="multipart/form-data">
                 @endif
                     @csrf
                     <div class="mb-3">

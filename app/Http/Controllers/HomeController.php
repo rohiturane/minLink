@@ -79,7 +79,7 @@ class HomeController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Setting updated successfully');
 
-        return redirect('/admin/setting');
+        return redirect('/setting');
     }
 
     public function pageMeta()
@@ -114,7 +114,7 @@ class HomeController extends Controller
         session()->flash('status', 'success');
         session()->flash('message', 'Page Information store successfully');
 
-        return redirect('/admin/page_informations');
+        return redirect('/page_informations');
     }
 
     public function pageEdit($id)
@@ -149,7 +149,7 @@ class HomeController extends Controller
         session()->flash('status', 'success');
         session()->flash('message', 'Page Information update successfully');
 
-        return redirect('/admin/page_informations');
+        return redirect('/page_informations');
     }
 
     public function pageDelete($id)
@@ -160,14 +160,14 @@ class HomeController extends Controller
         {
             session()->flash('status','error');
             session()->flash('message','Page not found');
-            return redirect('/admin/page_informations');
+            return redirect('/page_informations');
         }
 
         $page->delete();
 
         session()->flash('status','success');
         session()->flash('message','Page Information deleted Successfully');
-        return redirect('/admin/page_informations');
+        return redirect('/page_informations');
     }
 
     public function generateSiteMap()

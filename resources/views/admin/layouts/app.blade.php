@@ -22,7 +22,7 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="{{ url('/admin/dashboard')}}" class="text-nowrap logo-img">
+          <a href="{{ url('/dashboard')}}" class="text-nowrap logo-img">
             <img src="{{ asset('/Super Tools.png')}}" width="180" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -37,7 +37,7 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ url('/admin/dashboard')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{ url('/dashboard')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -46,7 +46,7 @@
             </li>
             
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ url('/admin/posts')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{ url('/posts')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
@@ -54,7 +54,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ url('/admin/setting')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{ url('/setting')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-settings"></i>
                 </span>
@@ -62,7 +62,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/admin/page_informations')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/page_informations')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-brand-pagekit"></i>
                 </span>
@@ -70,7 +70,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/admin/advertise')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/advertise')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-ad-2"></i>
                 </span>
@@ -78,7 +78,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/admin/tools')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/tools')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-tools"></i>
                 </span>
@@ -87,10 +87,10 @@
             </li>
             <div class="fixed-bottom">
               <li class="" style="padding: 0px 24px;">
-                <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/admin/optimize-app')}}">Optimize Application</a>
+                <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/optimize-app')}}">Optimize Application</a>
               </li>
               <li  style="padding: 0px 24px;">
-                <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/admin/generate/sitemap')}}">Generate Sitemap</a>
+                <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/generate/sitemap')}}">Generate Sitemap</a>
               </li>
             </div>
           </ul>
@@ -137,7 +137,7 @@
                           <p class="mb-0 fs-3">My Task</p>
                       </a> -->
                       <a href="#" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                      <form id="frm-logout" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
+                      <form id="frm-logout" action="{{ url('/logout') }}" method="POST" style="display: none;">
                           {{ csrf_field() }}
                       </form>
                       </div>
@@ -173,7 +173,7 @@
             
         if(empty($setting)) {
             $setting = Cache::rememberForever('setting', function () {
-                return Setting::get();
+                return \App\Models\Setting::get();
             });
         }
         $api_key = find_object($setting, 'google_capatch_site_key');

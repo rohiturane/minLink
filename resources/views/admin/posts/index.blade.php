@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Posts <a class="btn btn-sm btn-primary m-1" href="{{ url('/admin/post/create')}}">Add New</a></h5>
+                <h5 class="card-title fw-semibold mb-4">Posts <a class="btn btn-sm btn-primary m-1" href="{{ url('/post/create')}}">Add New</a></h5>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$posts->isEmpty())
@@ -64,10 +64,10 @@
                                         <h6 class="fw-semibold mb-0 fs-4">{{$post->user->name}}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <a href="{{ url('/admin/post/'.$post->id.'/edit')}}"><span>
+                                        <a href="{{ url('/post/'.$post->id.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
                                             </span></a>
-                                        <a href="{{ url('/admin/post/'.$post->id.'/delete')}}"><span>
+                                        <a href="{{ url('/post/'.$post->id.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
                                     </td>

@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Setting</h5>
-                <form action="{{url('/admin/setting/store')}}" method="post">
+                <form action="{{url('/setting/store')}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Google RECAPTCHA SITE KEY </label>

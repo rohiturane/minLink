@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.7",
         "melbahja/seo": "^2.1",
         "mrclay/minify": "^3.0",
+        "spatie/laravel-permission": "^6.3",
         "stymiee/email-validator": "^1.1"
     },
     "require-dev": {

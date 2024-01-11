@@ -9,9 +9,9 @@
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">{{ empty($page) ? 'Create Page Information' : 'Edit Page Information' }}</h5>
                 @if(empty($page))
-                    <form method="post" action="{{ url('/admin/page_information/store') }}">
+                    <form method="post" action="{{ url('/page_information/store') }}">
                 @else 
-                    <form method="post" action="{{ url('/admin/page_information/'.$page->id.'/update') }}">
+                    <form method="post" action="{{ url('/page_information/'.$page->id.'/update') }}">
                 @endif
                     @csrf
                     <div class="mb-3">
