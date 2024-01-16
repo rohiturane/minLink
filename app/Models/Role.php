@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Role extends Model
+class Role extends \Spatie\Permission\Models\Role
 {
-    use HasFactory;
+	/**
+	 * Name should be lowercase.
+	 *
+	 * @param string $value Name value
+	 */
+	public function setNameAttribute($value)
+	{
+		$this->attributes['name'] = strtolower($value);
+	}
+
+	public function getRoleNameAttribute()
+	{
+		return ucwords($this->name);
+	}
 }

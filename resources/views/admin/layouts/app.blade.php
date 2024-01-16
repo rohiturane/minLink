@@ -44,7 +44,7 @@
                 <span class="hide-menu">Dashboard</span>
               </a>
             </li>
-            
+            @can('view_post')
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ url('/posts')}}" aria-expanded="false">
                 <span>
@@ -53,6 +53,8 @@
                 <span class="hide-menu">Post</span>
               </a>
             </li>
+            @endcan
+            @can('view_setting')
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{ url('/setting')}}" aria-expanded="false">
                 <span>
@@ -61,6 +63,8 @@
                 <span class="hide-menu">Settings</span>
               </a>
             </li>
+            @endcan
+            @can('view_page_information')
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/page_informations')}}" aria-expanded="false">
                 <span>
@@ -69,22 +73,27 @@
                 <span class="hide-menu">Page Information</span>
               </a>
             </li>
+            @endcan
+            @can('view_invoices')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/advertise')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/invoices')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-ad-2"></i>
+                  <i class="ti ti-brand-pagekit"></i>
                 </span>
-                <span class="hide-menu">Advertise</span>
+                <span class="hide-menu">Invoices</span>
               </a>
             </li>
+            @endcan
+            @role('admin')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/tools')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/permissions')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-tools"></i>
+                  <i class="ti ti-brand-pagekit"></i>
                 </span>
-                <span class="hide-menu">Tool</span>
+                <span class="hide-menu">Permissions</span>
               </a>
             </li>
+            @endrole
             <div class="fixed-bottom">
               <li class="" style="padding: 0px 24px;">
                 <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/optimize-app')}}">Optimize Application</a>
@@ -107,11 +116,6 @@
             <li class="nav-item d-block d-xl-none">
                 <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
                 <i class="ti ti-menu-2"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link nav-icon-hover" target="_blank" href="{{ url('/')}}">
-                <div class="notification bg-primary window-maximize"></div>
                 </a>
             </li>
             </ul>

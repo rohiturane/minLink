@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PageInformation;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Subscription;
@@ -10,6 +11,7 @@ use App\Models\Setting;
 use Melbahja\Seo\Sitemap;
 use Melbahja\Seo\Ping;
 use App\Models\Post;
+use App\Models\Role;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
@@ -262,4 +264,40 @@ class HomeController extends Controller
         return view('frontend.contact-us', compact('page_meta','page_info'));
     }
 
+    public function permissions()
+    {
+        $roles = Role::with('permissions')->get();
+        $permissions = Permission::get();
+        return view('admin.permissions',compact('roles','permissions'));
+    }
+
+    public function storePermissions(Request $request)
+    {
+        $input_array = $request->all();
+        // dd($input_array);
+        foreach($input_array as $key => $field) {
+            
+            if (strpos($key, '_admin') !== false && $field == 'on') {
+                $permission = str_replace("_admin", "",$key);
+                $check = Permission::where('name', $permission)->first();
+                if($check) {
+                    $role = Role::where('name','admin')->first();
+                    $role->givePermissionTo($permission);
+                }
+            }
+            if (strpos($key, '_user') !== false && $field == 'on') {
+                $permission = str_replace("_user", "",$key);
+                $check = Permission::where('name', $permission)->first();
+                if($check) {
+                    $role = Role::where('name','user')->first();
+                    $role->givePermissionTo($permission);
+                }
+            }
+        }        
+
+        session()->flash('status','success');
+        session()->flash('message', 'Permission assigned to respective Role Successfully');
+
+        return redirect('/permissions');
+    }
 }

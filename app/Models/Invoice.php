@@ -11,4 +11,9 @@ class Invoice extends Model
     protected $fillable = [
         'title', 'html_content', 'status', 'created_by', 'updated_by'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'created_by');
+    }
 }

@@ -4,6 +4,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\SocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,9 @@ Route::get('/register', [AuthController::class,'register']);
 Route::post('/auth/register/user', [AuthController::class, 'registerUser']);
 Route::post('/logout', [AuthController::class,'logout']);
 
+Route::get('auth/google', [SocialController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
+
 Route::group(['middleware' => ['auth']], function () {
     // Account Page
     Route::get('/dashboard', [HomeController::class,'dashboard']);
@@ -61,4 +66,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate/sitemap',[HomeController::class,'generateSiteMap']);
     Route::get('/optimize-app', [HomeController::class, 'optimizeApplication']);
+
+    // Invoices
+    Route::get('/invoices', [InvoiceController::class, 'index']);
+    Route::get('/invoice/create', [InvoiceController::class, 'create']);
+    Route::post('/invoice/store', [InvoiceController::class, 'store']);
+    Route::get('/invoice/{uuid}/edit', [InvoiceController::class, 'edit']);
+    Route::post('/invoice/{uuid}/update',[InvoiceController::class, 'update']);
+    Route::get('/invoice/{uuid}/delete', [InvoiceController::class, 'destory']);
+
+    Route::get('/permissions', [HomeController::class, 'permissions']);
+    Route::post('/permissions/store', [HomeController::class, 'storePermissions']);
 });

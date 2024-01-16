@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Permission extends Model
+class Permission extends \Spatie\Permission\Models\Permission
 {
-    use HasFactory;
+    /**
+	 * Name should be lowercase.
+	 *
+	 * @param string $value Name value
+	 */
+	public function setNameAttribute($value)
+	{
+		$this->attributes['name'] = strtolower($value);
+	}
 }

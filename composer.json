@@ -14,6 +14,7 @@
         "io-developer/php-whois": "^4.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.7",
         "melbahja/seo": "^2.1",
         "mrclay/minify": "^3.0",

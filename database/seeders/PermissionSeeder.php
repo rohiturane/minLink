@@ -16,7 +16,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $entities  = ['roles', 'users', 'invoices'];
+        $entities  = ['roles', 'users', 'invoices','page_information','setting','post'];
 
 		$abilities = ['add', 'delete', 'delete_own', 'edit', 'edit_own', 'view', 'view_own'];
 
