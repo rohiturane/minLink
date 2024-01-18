@@ -84,6 +84,16 @@
               </a>
             </li>
             @endcan
+            @can('view_business')
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/businesses')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-brand-pagekit"></i>
+                </span>
+                <span class="hide-menu">Business</span>
+              </a>
+            </li>
+            @endcan
             @role('admin')
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/permissions')}}" aria-expanded="false">

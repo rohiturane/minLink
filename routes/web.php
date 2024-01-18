@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SocialController;
 
@@ -77,4 +78,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/permissions', [HomeController::class, 'permissions']);
     Route::post('/permissions/store', [HomeController::class, 'storePermissions']);
+
+
+    Route::get('/businesses',[BusinessController::class, 'index']);
+    Route::get('/business/create',[BusinessController::class,'create']);
+    Route::post('/business/store', [BusinessController::class, 'store']);
+    Route::get('/business/{uuid}/edit', [BusinessController::class, 'edit']);
+    Route::post('/business/{uuid}/update', [BusinessController::class, 'update']);
+    Route::get('/business/{uuid}/delete', [BusinessController::class, 'destory']);
 });

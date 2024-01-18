@@ -64,4 +64,9 @@ class InvoiceService
 
         return true;
     }
+
+    public function getDropdownList()
+    {
+        return Invoice::where('status','1')->pluck('title','uuid');
+    }
 }

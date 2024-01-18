@@ -9,7 +9,7 @@ class Invoice extends Model
     protected $table = 'invoices';
     
     protected $fillable = [
-        'title', 'html_content', 'status', 'created_by', 'updated_by'
+        'title', 'html_content', 'status', 'created_by', 'updated_by', 'uuid'
     ];
 
     public function user()
