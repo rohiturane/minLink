@@ -78,9 +78,9 @@
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/invoices')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-brand-pagekit"></i>
+                  <i class="ti ti-file-invoice"></i>
                 </span>
-                <span class="hide-menu">Invoices</span>
+                <span class="hide-menu">Templates</span>
               </a>
             </li>
             @endcan
@@ -88,9 +88,19 @@
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/businesses')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-brand-pagekit"></i>
+                  <i class="ti ti-building"></i>
                 </span>
                 <span class="hide-menu">Business</span>
+              </a>
+            </li>
+            @endcan
+            @can('view_user_invoice')
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/user/invoice')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-file-dollar"></i>
+                </span>
+                <span class="hide-menu">Invoices</span>
               </a>
             </li>
             @endcan
@@ -98,7 +108,7 @@
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/permissions')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-brand-pagekit"></i>
+                  <i class="ti ti-toggle-right"></i>
                 </span>
                 <span class="hide-menu">Permissions</span>
               </a>
@@ -182,7 +192,7 @@
   <script src="{{ asset('/js/dashboard.js')}}"></script>
   <script src="{{ asset('/js/custom.js')}}"></script>
   @stack('custom-scripts')
-  @php
+  @php/*
         $setting = Cache::get('setting');
             
         if(empty($setting)) {
@@ -190,11 +200,9 @@
                 return \App\Models\Setting::get();
             });
         }
-        $api_key = find_object($setting, 'google_capatch_site_key');
+        $api_key = find_object($setting, 'google_capatch_site_key');*/
     @endphp
-    @if(!$api_key->isEmpty())
-    <script src="https://www.google.com/recaptcha/api.js?render={{$api_key->first()->value}}"></script>
-    @endif
+   
   <script>
     $(function() {
             <?php if (session()->get('status') == 'error') { ?>

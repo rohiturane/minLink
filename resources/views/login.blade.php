@@ -91,11 +91,11 @@
                 return \App\Models\Setting::get();
             });
         }
-        $api_key = find_object($setting, 'google_capatch_site_key');
+        //$api_key = find_object($setting, 'google_capatch_site_key');
     @endphp
-    @if(!$api_key->isEmpty())
-    <script src="https://www.google.com/recaptcha/api.js?render={{$api_key->first()->value}}"></script>
-    @endif
+    
+    <!-- <script src="https://www.google.com/recaptcha/api.js?render={{}}"></script> -->
+    
 </body>
 
 </html>

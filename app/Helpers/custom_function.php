@@ -1,4 +1,5 @@
 <?php
+namespace App\Helpers;
 
 use App\Models\PageInformation;
 use App\Models\Setting;

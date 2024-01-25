@@ -6,7 +6,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\UserInvoiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,4 +88,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/business/{uuid}/edit', [BusinessController::class, 'edit']);
     Route::post('/business/{uuid}/update', [BusinessController::class, 'update']);
     Route::get('/business/{uuid}/delete', [BusinessController::class, 'destory']);
+
+    Route::get('/user/invoice', [UserInvoiceController::class, 'index']);
+    Route::get('/user/invoice/create', [UserInvoiceController::class, 'create']);
+    Route::post('/user/invoice/store',[UserInvoiceController::class, 'store']);
+    Route::get('/user/invoice/{uuid}/edit',[UserInvoiceController::class, 'edit']);
+    Route::post('/user/invoice/{uuid}/update', [UserInvoiceController::class, 'update']);
+    Route::get('/user/invoice/{uuid}/delete',[UserInvoiceController::class,'destory']);
+
+    Route::get('/razorpay',[RazorPayController::class, 'index']);
+    Route::post('/get-paid',[RazorPayController::class, 'handlePayment']);
 });

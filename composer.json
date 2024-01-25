@@ -6,20 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "barryvdh/laravel-dompdf": "^2.0",
         "cviebrock/eloquent-sluggable": "^9.0",
         "google/apiclient": "^2.15.0",
         "guzzlehttp/guzzle": "^7.2",
         "html2text/html2text": "^4.3",
-        "intervention/image": "^2.7",
-        "io-developer/php-whois": "^4.1",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.11",
         "laravel/tinker": "^2.7",
         "melbahja/seo": "^2.1",
-        "mrclay/minify": "^3.0",
-        "spatie/laravel-permission": "^6.3",
-        "stymiee/email-validator": "^1.1"
+        "razorpay/razorpay": "^2.9",
+        "spatie/laravel-permission": "^6.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
