@@ -104,6 +104,16 @@
               </a>
             </li>
             @endcan
+            @can('view_transaction')
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/transactions')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-history"></i>
+                </span>
+                <span class="hide-menu">Transactions</span>
+              </a>
+            </li>
+            @endcan
             @role('admin')
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/permissions')}}" aria-expanded="false">

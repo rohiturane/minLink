@@ -8,6 +8,7 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserInvoiceController;
 
 /*
@@ -97,5 +98,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/user/invoice/{uuid}/delete',[UserInvoiceController::class,'destory']);
 
     Route::get('/razorpay',[RazorPayController::class, 'index']);
-    Route::post('/get-paid',[RazorPayController::class, 'handlePayment']);
+    Route::post('/transaction-success',[RazorPayController::class, 'handlePayment']);
+    Route::post('/transaction-failed',[RazorPayController::class, 'handleFailure']);
+    Route::get('/transactions',[TransactionController::class,'index']);
+    Route::get('/transaction/{uuid}/view',[TransactionController::class, 'view']);
 });

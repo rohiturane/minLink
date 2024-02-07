@@ -13,4 +13,9 @@ class Transaction extends Model
         'user_id', 'user_invoice_id', 'transaction_no', 'payment_platform', 'payment_platform_ref_no', 
         'status', 'amount', 'payment_payload', 'uuid'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

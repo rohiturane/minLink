@@ -1,11 +1,6 @@
 @extends('admin.layouts.app')
 @section('admin_content')
-<link rel="stylesheet" href="{{asset('/css/grapes.min.css')}}">
-<style>
-    .gjs-one-bg {
-        background-color: #7c7a7a; 
-    }
-</style>
+<link rel="stylesheet" href="{{asset('vendor/laraberg/css/laraberg.css')}}">
 <div class="container-fluid">
     <div class="container-fluid">
         <div class="card">
@@ -24,11 +19,11 @@
                             <span class="text-danger">{{ $errors->first('title');}}</span>
                         @endif
                     </div>
-                    <input type="hidden" name="html_content" id="html_content" value="{{ empty($invoice) ? '' : $invoice->html_content }}" >              
+                             
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">HTML Content</label><br/>
-                        <span class="fw-bold">Use the following variable <br/>{logo}, {business_name}, {address}, {mobile}, {email}, {note}, {total_in_words}, {customer_name}, {customer_mobile}, {customer_email}, {customer_taxid}, {taxid}, {products}, {invoice_id}, {date}, {rates}, {qtys}, {product_totals}, {subtotal}, {subtax}, {final_total}</span>
-                        <div id="gjs"></div>
+                        <label for="exampleInputEmail1" class="form-label">HTML Content</label>
+                        <span class="fw-bold display-block mb-3">Use the following variable <br/>{logo}, {business_name}, {address}, {mobile}, {email}, {note}, {total_in_words}, {customer_name}, {customer_mobile}, {customer_email}, {customer_taxid}, {taxid}, {products}, {invoice_id}, {date}, {rates}, {qtys}, {product_totals}, {subtotal}, {subtax}, {final_total}</span>
+                        <textarea id="html_content" name="html_content" hidden>{{ !empty($invoice) ? $invoice->html_content : '' }}</textarea>
                         @if($errors->has('html_content'))
                             <span class="text-danger">{{ $errors->first('html_content');}}</span>
                         @endif
@@ -41,7 +36,7 @@
                             <option value="2" @php if(!empty($invoice)) { if($invoice->status == 2){ echo 'selected'; } } @endphp>Inactive</option>
                         </select>
                     </div>
-                    <button type="button" id="btnSubmit" class="btn btn-primary"> {{ empty($invoice) ? 'Save' : 'Update'}}</button>
+                    <button type="submit" class="btn btn-primary"> {{ empty($invoice) ? 'Save' : 'Update'}}</button>
                 </form>
             </div>
         </div>
@@ -49,26 +44,12 @@
 </div>
 @endsection
 @push('custom-scripts')
-<script src="{{ asset('/js/grapes.min.js')}}"></script>
-<script src="{{ asset('/js/basic.js')}}"></script>
-<script src="{{ asset('/js/preset-webpage.js')}}"></script>
+<script src="{{ asset('js/react.production.min.js')}}"></script>
+<script src="{{ asset('js/react-dom.production.min.js')}}"></script>
+<script src="{{ asset('vendor/laraberg/js/laraberg.js') }}"></script>
 <script>
     $(document).ready(function(){
-        var editor = grapesjs.init({
-            container : '#gjs',
-            storageManager: false,
-            plugins: ["gjs-blocks-basic",'grapesjs-preset-webpage'],
-            components: $('#html_content').val(),
-        });
-        $("#btnSubmit").click(function(){
-            // Let's find the input to check
-            var input = $("#html_content");
-            var Html = editor.getHtml();
-            var Css = editor.getCss();
-            input.val('<html><head><style>'+Css+'</style></head><body>'+Html+'</body></html>');
-            // editor.runCommand('canvas-clear');
-            $('#invoiceForm').submit();
-        });
+        Laraberg.init('html_content');
     });
     
 </script>

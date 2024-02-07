@@ -18,7 +18,7 @@ class UserInvoiceService
 
     public function store($params)
     {
-        $invoice = Invoice::find(2); //$params['invoice_id']
+        $invoice = Invoice::where('uuid', $params['invoice_id'])->first();
         $business = Business::where('user_id', auth()->user()->id)->first();
         $invoice_replace = [
             '{logo}' => asset($business->logo),
@@ -58,7 +58,7 @@ class UserInvoiceService
             'uuid' => Str::orderedUuid(),
             'date' => date('Y-m-d', strtotime($params['date'])),
             'user_id' => auth()->user()->id,
-            'invoice_id' => 2,//$params['invoice_id'],
+            'invoice_id' => $params['invoice_id'],
             'invoice_no' => $params['invoice_no'],
             'customer_name' => $params['customer_name'],
             'customer_mobile' => $params['customer_mobile'],
@@ -115,7 +115,7 @@ class UserInvoiceService
 
     public function update($uuid, $params)
     {
-        $invoice = Invoice::find(2); //$params['invoice_id']
+        $invoice = Invoice::where('uuid', $params['invoice_id'])->first();
         $business = Business::where('user_id', auth()->user()->id)->first();
         $invoice_replace = [
             '{logo}' => asset($business->logo),
@@ -154,7 +154,7 @@ class UserInvoiceService
 
         $insertData = [
             'date' => date('Y-m-d', strtotime($params['date'])),
-            'invoice_id' => 2,//$params['invoice_id'],
+            'invoice_id' => $params['invoice_id'],
             'invoice_no' => $params['invoice_no'],
             'customer_name' => $params['customer_name'],
             'customer_mobile' => $params['customer_mobile'],

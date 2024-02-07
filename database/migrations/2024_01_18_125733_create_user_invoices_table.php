@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid('uuid')->nullable();
             $table->date('date')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('invoice_id')->nullable();
+            $table->string('invoice_id')->nullable();
             $table->string('invoice_no')->nullable();
             $table->string('customer_name')->nullable();
             $table->text('html_content')->nullable();

@@ -59,6 +59,21 @@ if(!empty($invoice)) {
                         <div class="col-md-2">
                             <button id="add_row" type="button" class="btn btn-info">+</button>                
                         </div>
+                        <div class="col-md-8">
+                            <div class="mb-3 row">
+                                <label for="staticEmail" class="col-sm-4 col-form-label">Invoice Template</label>
+                                <div class="col-sm-5">
+                                    <select name="invoice_id" id="invoice_id" class="form-select">
+                                        @foreach($templates as $key => $template)
+                                            <option value="{{$key}}" @php if(!empty($invoice)) { if($invoice->invoice_id == $key){ echo 'selected'; } } @endphp>{{$template}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('invoice_id'))
+                                        <span class="text-danger">{{ $errors->first('invoice_id');}}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <input type="hidden" id="row_number" value="{{empty($invoice) ? 1: count($payloads->particular)}}">
                     <div class="table-responsive">

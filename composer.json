@@ -6,8 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "barryvdh/laravel-dompdf": "^2.0",
         "cviebrock/eloquent-sluggable": "^9.0",
+        "dompdf/dompdf": "^2.0",
         "google/apiclient": "^2.15.0",
         "guzzlehttp/guzzle": "^7.2",
         "html2text/html2text": "^4.3",
@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.7",
         "melbahja/seo": "^2.1",
         "razorpay/razorpay": "^2.9",
-        "spatie/laravel-permission": "^6.3"
+        "spatie/laravel-permission": "^6.3",
+        "van-ons/laraberg": "^2.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -33,15 +34,15 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        },
-        "files": [
-            "app/Helpers/custom_function.php"
-        ]
+        }        
     },
     "scripts": {
         "post-autoload-dump": [

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('transaction_no')->nullable();
             $table->string('payment_platform')->nullable();
             $table->string('payment_platform_ref_no')->nullable();
-            $table->boolean('status')->nullable();
+            $table->string('status')->nullable();
             $table->double('amount')->nullable();
             $table->text('payment_payload')->nullable();
             $table->timestamps();

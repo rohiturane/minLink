@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\InvoiceService;
 use App\Services\UserInvoiceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -9,10 +10,12 @@ use Illuminate\Support\Facades\Validator;
 class UserInvoiceController extends Controller
 {
     protected $service;
+    protected $invoice;
 
-    public function __construct(UserInvoiceService $service)
+    public function __construct(UserInvoiceService $service, InvoiceService $invoice)
     {
         $this->service = $service;
+        $this->invoice = $invoice;
     }
 
     public function index()
@@ -24,7 +27,8 @@ class UserInvoiceController extends Controller
 
     public function create()
     {
-        return view('admin.user_invoice.create');
+        $templates = $this->invoice->getDropdownList();
+        return view('admin.user_invoice.create', compact('templates'));
     }
 
     public function store(Request $request)
@@ -36,7 +40,7 @@ class UserInvoiceController extends Controller
             'customer_mobile' => 'required',
             'invoice_no' => 'required',
             'date' => 'required',
-            // 'invoice_id' => 'required'
+            'invoice_id' => 'required'
         ]);
 
         if($validate->fails())
@@ -55,8 +59,8 @@ class UserInvoiceController extends Controller
     public function edit($uuid)
     {
         $invoice = $this->service->get($uuid);
-
-        return view('admin.user_invoice.create', compact('invoice'));
+        $templates = $this->invoice->getDropdownList();
+        return view('admin.user_invoice.create', compact('invoice','templates'));
     }
 
     public function update($uuid, Request $request)
@@ -68,7 +72,7 @@ class UserInvoiceController extends Controller
             'customer_mobile' => 'required',
             'invoice_no' => 'required',
             'date' => 'required',
-            // 'invoice_id' => 'required'
+            'invoice_id' => 'required'
         ]);
 
         if($validate->fails())
