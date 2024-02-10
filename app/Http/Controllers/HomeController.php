@@ -29,10 +29,6 @@ class HomeController extends Controller
         if(!empty($page_info)) {
             $page_meta = generate_meta_information($page_info);
         }
-
-        $settings = Cache::rememberForever('setting', function () {
-            return Setting::get();
-        });
         
         return view('frontend.home',compact('page_info','page_meta'));
     }
@@ -177,7 +173,7 @@ class HomeController extends Controller
         try{
             $sitemap = new Sitemap(url('/'), ['save_path' => public_path('/')]);
             $routes = app('router')->getRoutes();
-            $expectRoute = ['sanctum','_ignition','api','auth','admin'];
+            $expectRoute = ['sanctum','_ignition','api','auth','admin', 'post'];
         
             $res = collect($routes)->map(function ($item) use($expectRoute) {
                 foreach($expectRoute as $substring)
@@ -190,10 +186,10 @@ class HomeController extends Controller
             $blogs = Post::where('status','1')->get();
             $sitemap->links(['name' => 'blog.xml', 'images' => true], function($map) use ($blogs)
             {
-                $map->loc('/blog')->freq('daily')->priority('0.8');
+                $map->loc('/posts')->freq('daily')->priority('0.8');
                 foreach($blogs as $blog)
                 {
-                    $map->loc('/blog/'.$blog->slug)->freq('weekly')->lastMod($blog->updated_at)->image(asset($blog->featured_image), ['caption' => $blog->title]);
+                    $map->loc('/post/'.$blog->slug)->freq('weekly')->lastMod($blog->updated_at)->image(asset($blog->featured_image), ['caption' => $blog->title]);
                 }
             });
             $sitemap->links('page.xml', function($map) use ($array_list)

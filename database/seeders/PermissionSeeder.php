@@ -16,7 +16,8 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        $entities  = ['roles', 'users', 'invoices','page_information','setting','post','business','user_invoice','transaction'];
+		$role = Role::insert(['name'=>'admin', 'guard_name'=>'web'],['name'=>'admin', 'guard_name'=>'web']);
+        $entities  = ['roles', 'users','page_information','setting','post','transaction','licence'];
 
 		$abilities = ['add', 'delete', 'delete_own', 'edit', 'edit_own', 'view', 'view_own'];
 
