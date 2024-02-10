@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid');
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('client_id')->nullable()->after('password');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('client_id');
+        });
     }
 };

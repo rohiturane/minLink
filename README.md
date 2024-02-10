@@ -1,4 +1,4 @@
 
-## Super Tools
+## License App
 
-Super tools application contains all web tools. 
+Generate License from our application 
