@@ -74,33 +74,23 @@
               </a>
             </li>
             @endcan
-            @can('view_invoices')
+            @can('view_project')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/invoices')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/projects')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-invoice"></i>
                 </span>
-                <span class="hide-menu">Templates</span>
+                <span class="hide-menu">Projects</span>
               </a>
             </li>
             @endcan
-            @can('view_business')
+            @can('view_licence')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/businesses')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/licenses')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-building"></i>
+                  <i class="ti ti-file-invoice"></i>
                 </span>
-                <span class="hide-menu">Business</span>
-              </a>
-            </li>
-            @endcan
-            @can('view_user_invoice')
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/user/invoice')}}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-dollar"></i>
-                </span>
-                <span class="hide-menu">Invoices</span>
+                <span class="hide-menu">Licenses</span>
               </a>
             </li>
             @endcan

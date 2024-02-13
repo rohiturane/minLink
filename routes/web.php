@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LicenseController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TransactionController;
@@ -71,31 +73,25 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/generate/sitemap',[HomeController::class,'generateSiteMap']);
     Route::get('/optimize-app', [HomeController::class, 'optimizeApplication']);
 
-    // Invoices
-    Route::get('/invoices', [InvoiceController::class, 'index']);
-    Route::get('/invoice/create', [InvoiceController::class, 'create']);
-    Route::post('/invoice/store', [InvoiceController::class, 'store']);
-    Route::get('/invoice/{uuid}/edit', [InvoiceController::class, 'edit']);
-    Route::post('/invoice/{uuid}/update',[InvoiceController::class, 'update']);
-    Route::get('/invoice/{uuid}/delete', [InvoiceController::class, 'destory']);
-
+   
     Route::get('/permissions', [HomeController::class, 'permissions']);
     Route::post('/permissions/store', [HomeController::class, 'storePermissions']);
 
+    //Project
+    Route::get('/projects',[ProjectController::class, 'index']);
+    Route::get('/project/create',[ProjectController::class, 'create']);
+    Route::get('/project/{uuid}/edit',[ProjectController::class, 'edit']);
+    Route::post('/project/store',[ProjectController::class,'store']);
+    Route::post('/project/{uuid}/update',[ProjectController::class, 'update']);
+    Route::get('/project/{uuid}/delete',[ProjectController::class, 'destory']);
 
-    Route::get('/businesses',[BusinessController::class, 'index']);
-    Route::get('/business/create',[BusinessController::class,'create']);
-    Route::post('/business/store', [BusinessController::class, 'store']);
-    Route::get('/business/{uuid}/edit', [BusinessController::class, 'edit']);
-    Route::post('/business/{uuid}/update', [BusinessController::class, 'update']);
-    Route::get('/business/{uuid}/delete', [BusinessController::class, 'destory']);
-
-    Route::get('/user/invoice', [UserInvoiceController::class, 'index']);
-    Route::get('/user/invoice/create', [UserInvoiceController::class, 'create']);
-    Route::post('/user/invoice/store',[UserInvoiceController::class, 'store']);
-    Route::get('/user/invoice/{uuid}/edit',[UserInvoiceController::class, 'edit']);
-    Route::post('/user/invoice/{uuid}/update', [UserInvoiceController::class, 'update']);
-    Route::get('/user/invoice/{uuid}/delete',[UserInvoiceController::class,'destory']);
+    //License
+    Route::get('/licenses',[LicenseController::class, 'index']);
+    Route::get('/license/create',[LicenseController::class, 'create']);
+    Route::get('/license/{uuid}/edit',[LicenseController::class, 'edit']);
+    Route::post('/license/store',[LicenseController::class,'store']);
+    Route::post('/license/{uuid}/update',[LicenseController::class, 'update']);
+    Route::get('/license/{uuid}/delete',[LicenseController::class, 'destory']);
 
     Route::get('/razorpay',[RazorPayController::class, 'index']);
     Route::post('/transaction-success',[RazorPayController::class, 'handlePayment']);

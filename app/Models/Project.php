@@ -9,8 +9,13 @@ class Project extends Model
     protected $table = 'projects';
 
     protected $fillable = [
-        'name'
+        'name',
+        'uuid',
+        'user_id'
     ];
 
-   
+   public function user()
+   {
+        return $this->belongsTo(User::class);
+   }
 }
