@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -80,9 +82,50 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $input_array['name'],
             'email' => $input_array['email'],
-            'password' => bcrypt($input_array['password'])
+            'password' => bcrypt($input_array['password']),
+            'client_id' => Str::random(15)
         ]);
 
+        $role = Role::where('name','user')->first();
+
+        $user->syncRoles($role);
+
         return redirect('/login')->with(['message' => 'Your Account has been created successfully.']);
+    }
+
+    public function profile()
+    {
+        return view('admin.profile');
+    }
+
+    public function profileStore(Request $request)
+    {
+        $input_array = $request->all();
+        //dd($input_array);
+
+        $validate = Validator::make($input_array, [
+            'name' => 'required',
+            'new_password' => 'nullable|min:8|confirmed',
+            'retype_password' => 'nullable|min:8'
+        ]);
+
+        if($validate->fails())
+        {
+            return back()->withErrors($validate)->withInput();
+        }
+
+        $user = User::find(auth()->user()->id);
+        $user->name = $input_array['name'];
+        
+        if($input_array['new_password'] == $input_array['retype_password'])
+        {
+            $user->password = bcrypt($input_array['new_password']);
+        }
+        $user->save();
+
+        session()->flash('status','success');
+        session()->flash('message', 'Profile Data Updated Successfully');
+
+        return redirect('/dashboard');
     }
 }

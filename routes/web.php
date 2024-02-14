@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Account Page
     Route::get('/dashboard', [HomeController::class,'dashboard']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/profile',[AuthController::class,'profile']);
+    Route::post('/profile/store', [AuthController::class, 'profileStore']);
     
     // blog
     Route::get('/posts',[BlogController::class, 'index']);

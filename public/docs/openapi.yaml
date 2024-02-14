@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: IBills
+  description: 'IBills is license management system. It provide all basic information like Request Header information. '
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8000'
+paths:
+  /api/license/used:
+    post:
+      summary: 'Update status against each license.'
+      operationId: updateStatusAgainstEachLicense
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - 'License management'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_code:
+                  type: string
+                  description: ''
+                  example: dolorem
+              required:
+                - access_code
+tags:
+  -
+    name: 'License management'
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: "You can generate Access Token using Client ID from profile section and Project ID from project list.\n            Concatenate them together with colon(:) and use base64 algorithm to encode this string.<br/><br/>\n            <b>Pass this encodedString to Request Header for Below API Call.</b><br/><br/>\n            Check the example \n            <aside>\n                $string = {CLIENT_ID}:{PROJECT_ID};<br/>\n                $encodedString = base64_encode($string);\n            </aside>\n            \n        "
+security:
+  -
+    default: []

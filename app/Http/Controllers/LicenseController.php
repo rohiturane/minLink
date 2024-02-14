@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\License;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Services\LicenseService;
 use App\Services\ProjectService;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class LicenseController extends Controller
@@ -89,5 +92,63 @@ class LicenseController extends Controller
         session()->flash('message', 'License deleted Successfully');
 
         return redirect('/licenses');
+    }
+
+    /**
+     * Update status against each license.
+     * 
+     * @header Authorization Bearer {ACCESS_TOKEN}
+     * @group License management
+     * 
+     */
+
+    public function updateStatus(Request $request)
+    {
+        $input_array = $request->all();
+        $headers = $request->header();
+        
+        $validate = Validator::make($input_array,[
+            'access_code' => 'required',
+        ]);
+
+        if($validate->fails())
+        {
+            return response()->json(['status' => false, 'errors' => $validate->getMessageBag()],400);
+        }
+
+        $user = User::where('client_id', $input_array['user'])->first();
+        if(!$user) {
+            return response()->json(['status'=>false,'message'=>'Invalid Client Id'], 400);
+        }
+
+        $project = Project::where('uuid', $input_array['project'])->first();
+        if(!$project) {
+            return response()->json(['status'=>false,'message'=>'Invalid Project Id'], 400);
+        }
+
+        $host = $headers['host'][0];
+
+        $license = License::where('project_id', $project->id)->where('user_id', $user->id)
+                            ->where('access_code', $input_array['access_code'])
+                            ->where('host', $host)->where('is_used', 0)->first();
+        
+        if(!$license) {
+            $checkLicense = License::where('project_id', $project->id)->where('user_id', $user->id)
+                            ->where('access_code', $input_array['access_code'])
+                            ->where('host', $host)->where('is_used', 1)->first();
+            if($checkLicense) {
+                return response()->json(['status' => false,'message'=>'Access Code Already Used.'], 403);     
+            }
+            return response()->json(['status'=>false,'message'=>'Invalid Access Code'], 400); 
+        }
+
+        $data = [
+            'is_used' => 1,
+            'request_payload' => json_encode($headers),
+        ];
+
+        $license->update($data);
+
+        return response()->json(['status' => true, 'message' => 'Successfully Activated'],200);
     }
 }
