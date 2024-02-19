@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderMail;
 use App\Models\License;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Services\LicenseService;
 use App\Services\ProjectService;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,9 +53,10 @@ class LicenseController extends Controller
         $license = $this->service->store($input_array);
 
         session()->flash('status','success');
-        session()->flash('message', 'License saved Successfully');
+        session()->flash('message', 'License created Successfully');
 
-        return redirect('/licenses');
+        //return redirect('/licenses');
+        return back();
     }
 
     public function edit($uuid)
@@ -150,5 +154,32 @@ class LicenseController extends Controller
         $license->update($data);
 
         return response()->json(['status' => true, 'message' => 'Successfully Activated'],200);
+    }
+
+    public function sendMailToUser(Request $request)
+    {
+        $input_array = $request->all();
+
+        $validate = Validator::make($input_array, [
+            'email' => 'required',
+        ]);
+
+        if($validate->fails())
+        {
+            return response()->json(['status'=>false, 'message'=> $validate->getMessageBag()]);
+        }
+
+        $license = License::with('user','project')->where('uuid', $input_array['license'])->first();
+        $project = $license->project->name;
+        $license_key = $license->access_code;
+        $user = $license->user->name; 
+        try{
+            Mail::to($input_array['email'])->send(new OrderMail($project, $license_key, $user));
+        } catch(\Exception $e){
+            Log::error('Exception while sending Email '.$e->getMessage().PHP_EOL);
+            return response()->json(['status'=>false, 'message'=>'Something went wrong! Contact to Admin']);
+        }
+
+        return response()->json(['status'=>true,'message'=>'Mail send successfully']);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +42,9 @@ class SocialController extends Controller
                         'social_platform' => 'google',
                         'password' => Hash::make(Str::random(10))
                     ]);
+                    $role = Role::where('name','user')->first();
+
+                    $newUser->syncRoles($role);
                     Auth::login($newUser);
                 }
                 return redirect('/');

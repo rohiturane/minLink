@@ -85,14 +85,14 @@
             </li>
             @endcan
             @can('view_licence')
-            <li class="sidebar-item">
+            <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/licenses')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-invoice"></i>
                 </span>
                 <span class="hide-menu">Licenses</span>
               </a>
-            </li>
+            </li> -->
             @endcan
             @can('view_transaction')
             <li class="sidebar-item">
@@ -113,7 +113,6 @@
                 <span class="hide-menu">Permissions</span>
               </a>
             </li>
-            @endrole
             <div class="fixed-bottom">
               <li class="" style="padding: 0px 24px;">
                 <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/optimize-app')}}">Optimize Application</a>
@@ -122,6 +121,7 @@
                 <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/generate/sitemap')}}">Generate Sitemap</a>
               </li>
             </div>
+            @endrole
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -192,16 +192,7 @@
   <script src="{{ asset('/js/dashboard.js')}}"></script>
   <script src="{{ asset('/js/custom.js')}}"></script>
   @stack('custom-scripts')
-  @php/*
-        $setting = Cache::get('setting');
-            
-        if(empty($setting)) {
-            $setting = Cache::rememberForever('setting', function () {
-                return \App\Models\Setting::get();
-            });
-        }
-        $api_key = find_object($setting, 'google_capatch_site_key');*/
-    @endphp
+
    
   <script>
     $(function() {

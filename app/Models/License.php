@@ -12,5 +12,13 @@ class License extends Model
         'uuid', 'project_id', 'user_id', 'access_code', 'host','is_used','request_payload'
     ];
 
-   
+   public function project()
+   {
+        return $this->belongsTo(Project::class,'project_id');
+   }
+
+   public function user()
+   {
+    return $this->belongsTo(User::class,'user_id');
+   }
 }

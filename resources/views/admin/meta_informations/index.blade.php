@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Page Information <a class="btn btn-sm btn-primary m-1" href="{{ url('/page_information/create')}}">Add New</a></h5>
+                <h5 class="card-title fw-semibold mb-4">Page Information @can('add_page_information')<a class="btn btn-sm btn-primary m-1" href="{{ url('/page_information/create')}}">Add New</a>@endcan</h5>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$metas->isEmpty())
@@ -38,12 +38,16 @@
                                         <p class="mb-0 fw-normal text-wrap">{{ $meta->meta_title }}</p>
                                     </td>
                                     <td class="border-bottom-0">
+                                        @can('edit_page_information')
                                         <a href="{{ url('/page_information/'.$meta->id.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
                                             </span></a>
+                                            @endcan
+                                        @can('delete_page_information')
                                         <a href="{{ url('/page_information/'.$meta->id.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach

@@ -18,4 +18,9 @@ class Project extends Model
    {
         return $this->belongsTo(User::class);
    }
+
+   public function license()
+   {
+        return $this->hasMany(License::class);
+   }
 }

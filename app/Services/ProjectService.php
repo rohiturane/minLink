@@ -31,7 +31,7 @@ class ProjectService
 
     public function get($uuid)
     {
-        $project = Project::where('uuid', $uuid)->first();
+        $project = Project::with('license','license.user')->where('uuid', $uuid)->first();
 
         return $project;
     }

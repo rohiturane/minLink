@@ -85,4 +85,11 @@ class ProjectController extends Controller
 
         return redirect('/projects');
     }
+
+    public function viewDetails($uuid)
+    {
+        $project = $this->service->get($uuid);
+        
+        return view('admin.projects.view', compact('project'));
+    }
 }

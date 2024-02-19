@@ -86,6 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/project/store',[ProjectController::class,'store']);
     Route::post('/project/{uuid}/update',[ProjectController::class, 'update']);
     Route::get('/project/{uuid}/delete',[ProjectController::class, 'destory']);
+    Route::get('/project/{uuid}/view', [ProjectController::class, 'viewDetails']);
 
     //License
     Route::get('/licenses',[LicenseController::class, 'index']);
@@ -100,4 +101,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/transaction-failed',[RazorPayController::class, 'handleFailure']);
     Route::get('/transactions',[TransactionController::class,'index']);
     Route::get('/transaction/{uuid}/view',[TransactionController::class, 'view']);
+
+    Route::post('/send/mail',[LicenseController::class, 'sendMailToUser']);
 });

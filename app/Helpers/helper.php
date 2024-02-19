@@ -538,7 +538,7 @@ if(!function_exists('numberToText'))
         return ($Rupees ? $Rupees . 'Rupees Only' : '') . $paise;
     }
 }
-if(function_exists('randomString'))
+if(!function_exists('randomString'))
 {
     function randomString($n) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Projects <a class="btn btn-sm btn-primary m-1" href="{{ url('/project/create')}}">Add New</a></h5>
+                <h5 class="card-title fw-semibold mb-4">Projects @can('add_project')<a class="btn btn-sm btn-primary m-1" href="{{ url('/project/create')}}">Add New</a>@endcan</h5>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$projects->isEmpty())
@@ -44,12 +44,21 @@
                                         <h6 class="fw-semibold mb-0 fs-4">{{$project->user->name}}</h6>
                                     </td>
                                     <td class="border-bottom-0">
+                                        @can('edit_project')
                                         <a href="{{ url('/project/'.$project->uuid.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
-                                            </span></a>
+                                            </span></a>&nbsp;
+                                        @endcan
+                                        @can('view_licence')
+                                        <a href="{{ url('/project/'.$project->uuid.'/view')}}"><span>
+                                            <i class="ti ti-file-text"></i>
+                                            </span></a>&nbsp;
+                                        @endcan
+                                        @can('delete_project')
                                         <a href="{{ url('/project/'.$project->uuid.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
+                                            @endcan
                                     </td>
                                 </tr>
                                 @endforeach

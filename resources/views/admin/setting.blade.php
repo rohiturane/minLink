@@ -23,14 +23,6 @@
                         <input type="text" class="form-control" id="google_api_key" name="google_api_key"  value="{{ empty($settings) ? '' : (find_object($settings, 'google_api_key')->isEmpty() ? '' :find_object($settings, 'google_api_key')->first()->value) }}" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Moz Access ID </label>
-                        <input type="text" class="form-control" id="moz_access_id" name="moz_access_id"  value="{{ empty($settings) ? '' : (find_object($settings, 'moz_access_id')->isEmpty() ? '' :find_object($settings, 'moz_access_id')->first()->value) }}" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Moz Secret Key </label>
-                        <input type="text" class="form-control" id="moz_secret_key" name="moz_secret_key"  value="{{ empty($settings) ? '' : (find_object($settings, 'moz_secret_key')->isEmpty() ? '' :find_object($settings, 'moz_secret_key')->first()->value) }}" aria-describedby="emailHelp">
-                    </div>
-                    <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Add Custom Code on Header</label>
                         <textarea class="form-control" rows="4" id="custom_header" name="custom_header" >{{ empty($settings) ? '' : (find_object($settings, 'custom_footer')->isEmpty() ? '' : find_object($settings, 'custom_header')->first()->value)}}</textarea>
                     </div>            
