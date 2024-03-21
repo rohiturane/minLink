@@ -74,16 +74,6 @@
               </a>
             </li>
             @endcan
-            @can('view_project')
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/projects')}}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-invoice"></i>
-                </span>
-                <span class="hide-menu">Projects</span>
-              </a>
-            </li>
-            @endcan
             @can('view_licence')
             <!-- <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('/licenses')}}" aria-expanded="false">
