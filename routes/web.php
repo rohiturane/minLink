@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\DomainController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LicenseController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
@@ -79,22 +81,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/permissions', [HomeController::class, 'permissions']);
     Route::post('/permissions/store', [HomeController::class, 'storePermissions']);
 
-    //Project
-    Route::get('/projects',[ProjectController::class, 'index']);
-    Route::get('/project/create',[ProjectController::class, 'create']);
-    Route::get('/project/{uuid}/edit',[ProjectController::class, 'edit']);
-    Route::post('/project/store',[ProjectController::class,'store']);
-    Route::post('/project/{uuid}/update',[ProjectController::class, 'update']);
-    Route::get('/project/{uuid}/delete',[ProjectController::class, 'destory']);
-    Route::get('/project/{uuid}/view', [ProjectController::class, 'viewDetails']);
+    // Domain
+    Route::get('/domains',[DomainController::class, 'index']);
+    Route::get('/domain/create',[DomainController::class, 'create']);
+    Route::post('/domain/store',[DomainController::class, 'store']);
+    Route::get('/domain/{uuid}/edit',[DomainController::class, 'edit']);
+    Route::post('/domain/{uuid}/update',[DomainController::class, 'update']);
+    Route::get('/domain/{uuid}/delete',[DomainController::class, 'delete']);
 
-    //License
-    Route::get('/licenses',[LicenseController::class, 'index']);
-    Route::get('/license/create',[LicenseController::class, 'create']);
-    Route::get('/license/{uuid}/edit',[LicenseController::class, 'edit']);
-    Route::post('/license/store',[LicenseController::class,'store']);
-    Route::post('/license/{uuid}/update',[LicenseController::class, 'update']);
-    Route::get('/license/{uuid}/delete',[LicenseController::class, 'destory']);
+    // Links
+    Route::get('/links',[LinkController::class, 'index']);
+    Route::get('/link/create',[LinkController::class, 'create']);
+    Route::post('/link/store',[LinkController::class, 'store']);
+    Route::get('/link/{uuid}/edit',[LinkController::class, 'edit']);
+    Route::post('/link/{uuid}/update',[LinkController::class, 'update']);
+    Route::get('/link/{uuid}/delete',[LinkController::class, 'delete']);
+
+    Route::get('/link/{link}/analytics', [LinkController::class, 'analytics']);
+    Route::get('/link/{link}/preview', [LinkController::class, 'preview']);
 
     Route::get('/razorpay',[RazorPayController::class, 'index']);
     Route::post('/transaction-success',[RazorPayController::class, 'handlePayment']);
@@ -102,5 +106,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/transactions',[TransactionController::class,'index']);
     Route::get('/transaction/{uuid}/view',[TransactionController::class, 'view']);
 
-    Route::post('/send/mail',[LicenseController::class, 'sendMailToUser']);
+
 });
+
+Route::any('{code}', [LinkController::class, 'visit'])->where('all', '.*');
+Route::get('{code}/qr', [LinkController::class,'qr'])->where('all', '.*');

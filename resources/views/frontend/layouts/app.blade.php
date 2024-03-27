@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="d-flex align-items-center ">
                 <a href="/" class="navbar-brand m-0 textColor fw-bold brand">
-                    <img src="{{ asset('/Super Tools.png')}}" alt="" style="width: 200px;" srcset="">
+                    <img src="{{ asset('/logo.png')}}" alt="" style="width: 200px;" srcset="">
                 </a>
 
                 <div class="position-relative ms-4 d-none d-xl-inline-block">

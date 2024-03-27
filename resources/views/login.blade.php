@@ -16,10 +16,10 @@
   <meta property="twitter:title" content="Super Tools Login" />
   <meta property="twitter:description" content="Login to Super Tools Platforms" />
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:image" content="http://127.0.0.1:8000/Super Tools.png" />
+  <meta property="twitter:image" content="http://127.0.0.1:8000/logo.png" />
   <meta property="og:title" content="Super Tools Login" />
   <meta property="og:description" content="Login to Super Tools Platforms" />
-  <meta property="og:image" content="http://127.0.0.1:8000/Super Tools.png" />
+  <meta property="og:image" content="http://127.0.0.1:8000/logo.png" />
   <link rel="stylesheet" href="{{ asset('/css/styles.min.css')}}" />
 </head>
 
@@ -35,9 +35,9 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="{{ url('/') }}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="{{ asset('/Super Tools.png')}}" width="180" alt="">
+                  <img src="{{ asset('/logo.png')}}" width="180" alt="">
                 </a>
-                <p class="text-center">Super Tools Login</p>
+                <p class="text-center">Min-Link Login</p>
                 @if(session()->has('message'))
                 <div class="alert alert-success" role="alert">
                     {{ session()->get('message')}}

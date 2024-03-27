@@ -23,7 +23,7 @@
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
           <a href="{{ url('/dashboard')}}" class="text-nowrap logo-img">
-            <img src="{{ asset('/Super Tools.png')}}" width="180" alt="" />
+            <img src="{{ asset('/logo.png')}}" width="180" alt="" />
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -74,15 +74,25 @@
               </a>
             </li>
             @endcan
-            @can('view_licence')
-            <!-- <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/licenses')}}" aria-expanded="false">
+            @can('view_link')
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/links')}}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-file-invoice"></i>
+                  <i class="ti ti-link"></i>
                 </span>
-                <span class="hide-menu">Licenses</span>
+                <span class="hide-menu">Links</span>
               </a>
-            </li> -->
+            </li>
+            @endcan
+            @can('view_domain')
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/domains')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-world"></i>
+                </span>
+                <span class="hide-menu">Domains</span>
+              </a>
+            </li>
             @endcan
             @can('view_transaction')
             <li class="sidebar-item">

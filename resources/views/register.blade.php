@@ -4,18 +4,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Super Tools</title>
-  <meta name="title" content="Super Tools" />
+  <title>Min-Link</title>
+  <meta name="title" content="Min-Link" />
   <meta name="description" content="Register to Super Tools Platforms" />
   <meta name="author" content="DevRohit" />
   <link rel="canonical" href="http://127.0.0.1:8000" />
   <meta property="twitter:title" content="Super Tools Register" />
   <meta property="twitter:description" content="Register to Super Tools Platforms" />
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:image" content="http://127.0.0.1:8000/Super Tools.png" />
+  <meta property="twitter:image" content="http://127.0.0.1:8000/logo.png" />
   <meta property="og:title" content="Super Tools Register" />
   <meta property="og:description" content="Register to Super Tools Platforms" />
-  <meta property="og:image" content="http://127.0.0.1:8000/Super Tools.png" />
+  <meta property="og:image" content="http://127.0.0.1:8000/logo.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/apple-touch-icon.png')}}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/favicon-32x32.png')}}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/favicon-16x16.png')}}">
@@ -35,7 +35,7 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="{{url('/')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="{{ asset('/Super Tools.png')}}" width="180" alt="">
+                  <img src="{{ asset('/logo.png')}}" width="180" alt="">
                 </a>
                 <p class="text-center">Super Tools Register</p>
                 <form method="post" action="{{ url('/auth/register/user')}}">
