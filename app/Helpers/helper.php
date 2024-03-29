@@ -552,3 +552,28 @@ if(!function_exists('randomString'))
         return $randomString;
     }
 }
+if(!function_exists('page_title')) 
+{
+    function page_title($url) 
+    {
+        $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        );  
+        $fp = file_get_contents($url, false, stream_context_create($arrContextOptions));
+        if (!$fp) 
+            return null;
+
+        $res = preg_match("/<title>(.*)<\/title>/siU", $fp, $title_matches);
+        if (!$res) 
+            return null; 
+
+        // Clean up title: remove EOL's and excessive whitespace.
+        $title = preg_replace('/\s+/', ' ', $title_matches[1]);
+        $title = trim($title);
+        return $title;
+    }
+}
+

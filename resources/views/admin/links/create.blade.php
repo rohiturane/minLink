@@ -7,9 +7,9 @@
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">{{ empty($link) ? 'Create Link': 'Update Link'}}</h5>
                 @if(empty($link))
-                <form action="{{url('/link/store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('/admin/link/store')}}" method="post" enctype="multipart/form-data">
                 @else
-                <form action="{{url('/link/'.$link->uuid.'/update')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('/admin/link/'.$link->uuid.'/update')}}" method="post" enctype="multipart/form-data">
                 @endif
                     @csrf
                     <div class="mb-3">

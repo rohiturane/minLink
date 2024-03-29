@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Profile</h5>
-                <form action="{{url('/profile/store')}}" method="post">
+                <form action="{{url('/admin/profile/store')}}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Name</label>

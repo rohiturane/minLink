@@ -40,7 +40,7 @@ class AuthController extends Controller
         {
             $request->session()->regenerate();
  
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/admin/dashboard');
         }
 
         return back()->withErrors([
@@ -126,6 +126,6 @@ class AuthController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Profile Data Updated Successfully');
 
-        return redirect('/dashboard');
+        return redirect('/admin/dashboard');
     }
 }

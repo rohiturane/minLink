@@ -45,7 +45,7 @@ class DomainController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Domain Saved Successfully');
 
-        return redirect('/domains');
+        return redirect('/admin/domains');
     }
 
     public function edit($uuid)
@@ -80,7 +80,7 @@ class DomainController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Domain Updated Successfully');
 
-        return redirect('/domains');
+        return redirect('/admin/domains');
     }
 
     public function delete($uuid)
@@ -91,7 +91,7 @@ class DomainController extends Controller
             session()->flash('status','success');
             session()->flash('message', 'Something went Wrong!! try again');
 
-            return redirect('/domains');
+            return redirect('/admin/domains');
         }
         //Link::where('domain_id', $domain->id)->update(['domain_id' => null]);
         $domain->delete();
@@ -99,6 +99,6 @@ class DomainController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Domain Deleted Successfully');
 
-        return redirect('/domains');
+        return redirect('/admin/domains');
     }
 }

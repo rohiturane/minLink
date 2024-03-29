@@ -47,7 +47,7 @@ Route::post('/logout', [AuthController::class,'logout']);
 Route::get('auth/google', [SocialController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
     // Account Page
     Route::get('/dashboard', [HomeController::class,'dashboard']);
     Route::post('/logout', [AuthController::class, 'logout']);

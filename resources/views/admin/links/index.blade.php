@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Links @can('add_link')<a class="btn btn-sm btn-primary m-1" href="{{ url('/link/create')}}">Add New</a>@endcan</h5>
+                <h5 class="card-title fw-semibold mb-4">Links @can('add_link')<a class="btn btn-sm btn-primary m-1" href="{{ url('/admin/link/create')}}">Add New</a>@endcan</h5>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$links->isEmpty())
@@ -53,22 +53,22 @@
                                         <p class="mb-0 fw-normal">{{ (empty($link->domain->redirect) ? url('/') : $link->domain->redirect).'/'.$link->code }}</p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $link->user->name }}</p>
+                                        <p class="mb-0 fw-normal">{{ empty($link->user) ? '-' : $link->user->name }}</p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ 0 }}</p>
+                                        <p class="mb-0 fw-normal">{{ $link->link_visits->count() }}</p>
                                     </td>
                                     <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ '-' }}</p>
+                                        <p class="mb-0 fw-normal">{{ empty($link->expires_at) ? '-' : date('d-M-Y', strtotime($link->expires_at)) }}</p>
                                     </td>
-                                    <td class="border-bottom-0">
+                                    <td class="border-bottom-0">    
                                         @can('edit_link')
-                                        <a href="{{ url('/link/'.$link->uuid.'/edit')}}"><span>
+                                        <a href="{{ url('/admin/link/'.$link->uuid.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
                                             </span></a>
                                         @endcan
                                         @can('delete_link')
-                                        <a href="{{ url('/link/'.$link->uuid.'/delete')}}"><span>
+                                        <a href="{{ url('/admin/link/'.$link->uuid.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
                                         @endcan

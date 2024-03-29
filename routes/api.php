@@ -3,6 +3,7 @@
 use App\Http\Controllers\DeveloperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LicenseController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\SEOController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,4 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
-Route::group(['middleware' => ['customer_auth']], function () {
-    Route::post('/license/used', [LicenseController::class, 'updateStatus']);
-});
+Route::post('/generate/short-link',[LinkController::class, 'generateLink']);

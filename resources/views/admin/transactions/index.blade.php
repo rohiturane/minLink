@@ -46,7 +46,7 @@
                                     </td>
                                     <td class="border-bottom-0">
                                         @can('edit_invoices')
-                                        <a target="_blank" href="{{ url('/transaction/'.$transaction->uuid.'/view')}}"><span>
+                                        <a target="_blank" href="{{ url('/admin/transaction/'.$transaction->uuid.'/view')}}"><span>
                                             <i class="ti ti-printer"></i>
                                             </span>
                                         </a>

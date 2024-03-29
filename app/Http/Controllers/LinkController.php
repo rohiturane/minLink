@@ -24,7 +24,7 @@ class LinkController extends Controller
 {
     public function index()
     {
-        $links = Link::with('user')->get();
+        $links = Link::with('user','link_visits')->get();
 
         return view('admin.links.index', compact('links'));
     }
@@ -42,7 +42,7 @@ class LinkController extends Controller
 
         $validate = Validator::make($input_array, [
             'url' => 'required',
-            'title' => 'required'
+            // 'title' => 'required'
         ]);
 
         if($validate->fails())
@@ -55,7 +55,7 @@ class LinkController extends Controller
         $link->code = !empty($request->get('code')) ? $request->get('code') : Str::random(5);
         $link->url = $request->get('url');
         $link->type = $request->has('type') ? $request->get('type') : 1;
-        $link->title = $request->get('title');
+        $link->title = $request->has('title') ? $request->get('title') : page_title($request->get('url'));
         $link->tags = json_encode($request->get('tags'));
         $link->description = $request->get('description');
         $link->password = $request->get('password');
@@ -72,7 +72,7 @@ class LinkController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Links Saved Successfully');
 
-        return redirect('/links');
+        return redirect('/admin/links');
     }
 
     public function edit($uuid)
@@ -90,7 +90,7 @@ class LinkController extends Controller
 
         $validate = Validator::make($input_array, [
             'url' => 'required',
-            'title' => 'required'
+            // 'title' => 'required'
         ]);
 
         if($validate->fails())
@@ -118,7 +118,7 @@ class LinkController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Links Updated Successfully');
 
-        return redirect('/links');
+        return redirect('/admin/links');
     }
 
     public function delete($uuid)
@@ -130,7 +130,7 @@ class LinkController extends Controller
             session()->flash('status','success');
             session()->flash('message', 'Something went Wrong!! try again');
 
-            return redirect('/links');
+            return redirect('/admin/links');
         }
 
         // LinkVisit::where('link_id', $link->id)->delete();
@@ -139,7 +139,7 @@ class LinkController extends Controller
         session()->flash('status','success');
         session()->flash('message', 'Link Deleted Successfully');
 
-        return redirect('/links');
+        return redirect('/admin/links');
     }
 
     /**
@@ -208,7 +208,7 @@ class LinkController extends Controller
                 throw new Exception('Unable to save visit log');
             }
         } else {
-            return redirect('/dashboard');
+            return redirect('/admin/dashboard');
         }
     }
 
@@ -394,5 +394,35 @@ class LinkController extends Controller
             'mime' => File::mimeType('../public/images/default.png'),
             'image' => base64_encode(File::get('../public/images/default.png'))
         ]);
+    }
+
+    public function generateLink(Request $request)
+    {
+        $input_array = $request->all();
+
+        $validate = Validator::make($input_array, [
+            'link' => 'required',
+        ]);
+
+        if($validate->fails())
+        {
+            return response()->json(['status' => false, 'message' => 'Something went wrong!!']);
+        }
+
+        $link = new Link();
+        $link->uuid = Str::orderedUuid();
+        $link->code = Str::random(5);
+        $link->url = $request->get('link');
+        $link->type = 1;
+        $link->title = page_title($request->get('link'));
+        $link->archived = false;
+        $link->disabled = false;
+        if(auth()->check())
+        {
+            $link->user_id = auth()->user()->id;
+        }
+        $link->save();
+
+        return response()->json(['status'=>true, 'link' => $link]);
     }
 }

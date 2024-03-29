@@ -15,6 +15,6 @@ class LinkVisit extends Model
 
     public function link()
     {
-        return $this->belongsTo(Link::class);
+        return $this->belongsTo(Link::class,'link_id');
     }
 }

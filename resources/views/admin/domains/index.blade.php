@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Domains @can('add_domain')<a class="btn btn-sm btn-primary m-1" href="{{ url('/domain/create')}}">Add New</a>@endcan</h5>
+                <h5 class="card-title fw-semibold mb-4">Domains @can('add_domain')<a class="btn btn-sm btn-primary m-1" href="{{ url('/admin/domain/create')}}">Add New</a>@endcan</h5>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$domains->isEmpty())
@@ -51,12 +51,12 @@
                                     </td>
                                     <td class="border-bottom-0">
                                         @can('edit_domain')
-                                        <a href="{{ url('/domain/'.$domain->uuid.'/edit')}}"><span>
+                                        <a href="{{ url('/admin/domain/'.$domain->uuid.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
                                             </span></a>
                                         @endcan
                                         @can('delete_domain')
-                                        <a href="{{ url('/domain/'.$domain->uuid.'/delete')}}"><span>
+                                        <a href="{{ url('/admin/domain/'.$domain->uuid.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
                                         @endcan

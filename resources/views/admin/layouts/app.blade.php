@@ -37,7 +37,7 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ url('/dashboard')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{ url('/admin/dashboard')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -46,7 +46,7 @@
             </li>
             @can('view_post')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ url('/posts')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{ url('/admin/posts')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
@@ -56,7 +56,7 @@
             @endcan
             @can('view_setting')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{ url('/setting')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{ url('/admin/setting')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-settings"></i>
                 </span>
@@ -66,7 +66,7 @@
             @endcan
             @can('view_page_information')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/page_informations')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/admin/page_informations')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-brand-pagekit"></i>
                 </span>
@@ -76,7 +76,7 @@
             @endcan
             @can('view_link')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/links')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/admin/links')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-link"></i>
                 </span>
@@ -86,7 +86,7 @@
             @endcan
             @can('view_domain')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/domains')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/admin/domains')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-world"></i>
                 </span>
@@ -96,7 +96,7 @@
             @endcan
             @can('view_transaction')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/transactions')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/admin/transactions')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-history"></i>
                 </span>
@@ -106,7 +106,7 @@
             @endcan
             @role('admin')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{url('/permissions')}}" aria-expanded="false">
+              <a class="sidebar-link" href="{{url('/admin/permissions')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-toggle-right"></i>
                 </span>
@@ -115,10 +115,10 @@
             </li>
             <div class="fixed-bottom">
               <li class="" style="padding: 0px 24px;">
-                <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/optimize-app')}}">Optimize Application</a>
+                <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/admin/optimize-app')}}">Optimize Application</a>
               </li>
               <li  style="padding: 0px 24px;">
-                <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/generate/sitemap')}}">Generate Sitemap</a>
+                <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/admin/generate/sitemap')}}">Generate Sitemap</a>
               </li>
             </div>
             @endrole

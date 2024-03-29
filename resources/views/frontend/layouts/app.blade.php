@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! empty($page_meta) ? '' : $page_meta !!}
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/all.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     <script src="{{asset('js/jquery-3.7.1.min.js')}}"></script>
@@ -27,14 +27,7 @@
                 </a>
 
                 <div class="position-relative ms-4 d-none d-xl-inline-block">
-                    <div class="dropdown">
-                        <input class="searchInput bg-body-tertiary iconCursor ps-md-5 p-1 p-md-2" id="search" type="search" onkeyup="doOn(this);" placeholder="Search Tools" aria-label="Search">
-                        
-                        <span class="position-absolute searchImg iconCursor">
-                            <i class="fa-solid fa-magnifying-glass"></i></span>
-
-                            <ul id="def1" class="dropdown-menu list-group" style="display:none"></ul>
-                    </div>
+                    
                 </div>
                 
             </div>
@@ -103,87 +96,40 @@
         @yield('content')
     </div>
     <!-- Remove the container if you want to extend the Footer to full width. -->
-    <div class="container-fluid" style="background: black;">
+    <div class="container-fluid" style="background: black;position:absolute;">
 
         <footer class="text-center text-lg-start mt-xl-5 pt-4">
             <!-- Grid container -->
             <div class="container p-4">
                 <!--Grid row-->
                 <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <a href="/" class="navbar-brand m-3 textColor fw-bold brand">
+                            <img src="{{ asset('/logo-removebg.png')}}" alt="" style="width: 200px;" srcset="">
+                        </a>
+                        <p class="text-white">Min-Link is the World's Shortest Link Shortener service to track, brand, and share short URLs.</p>
+                    </div>
                     <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h5 class="text-uppercase mb-4" style="color: darkgray;">YOUTUBE TOOLS</h5>
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <h5 class="text-uppercase mb-4" style="color: darkgray;">Quick Links</h5>
 
                         <ul class="list-unstyled mb-4">
                             <li>
-                                <a href="{{ url('/youtube-trends')}}" class="text-white nav-link">Youtube Trends</a>
+                                <a href="{{ url('/posts')}}" class="text-white nav-link">Posts</a>
                             </li>
                             <li>
-                                <a href="{{ url('/youtube-generate-tags')}}" class="text-white nav-link">Youtube Tag Generator</a>
+                                <a href="{{ url('/privacy-policy')}}" class="text-white nav-link">Privacy Policy</a>
                             </li>
                             <li>
-                                <a href="{{ url('/youtube-generate-hashtag')}}" class="text-white nav-link">Youtube Hashtag Generator</a>
+                                <a href="{{ url('/terms-of-service')}}" class="text-white nav-link">Terms of Service</a>
                             </li>
                             <li>
-                                <a href="{{ url('/youtube-video-statistics')}}" class="text-white nav-link">Youtube Video Statistics</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/youtube-channel-statistics')}}" class="text-white nav-link">Youtube Channel Statistics</a>
+                                <a href="{{ url('/contact-us')}}" class="text-white nav-link">Contact Us</a>
                             </li>
                         </ul>
                     </div>
                     <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h5 class="text-uppercase mb-4" style="color: darkgray;">BLOG SEO Tools</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{{ url('/terms-of-service-generator')}}" class="text-white nav-link">Terms of Service Generator</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/privacy-policy-generator')}}" class="text-white nav-link">Privacy Policy Generator</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/lorem-ipsum-generator')}}" class="text-white nav-link">Lorem Ipsum Generator</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/keyword-suggestion')}}" class="text-white nav-link">Keyword Suggestion Tool</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/domain-lookup')}}" class="text-white nav-link">Whois Domain Lookup</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/robot-txt-generator')}}" class="text-white nav-link">Robot.txt Generator</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h5 class="text-uppercase mb-4" style="color: darkgray;">Image Tools</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{{ url('/jpg-to-webp-generator')}}" class="text-white nav-link">JPG to Webp converter</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/png-to-webp-generator')}}" class="text-white nav-link">PNG to Webp converter</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/image-resizer')}}" class="text-white nav-link">Image Resizer</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/image-compressor')}}" class="text-white nav-link">Image Compressor</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                         <h5 class="text-uppercase mb-4" style="color: darkgray;">Sign up to our newsletter</h5>
 
                         <div class="form-outline form-white mb-4">
@@ -193,36 +139,6 @@
                         </div>
                     </div>
                     <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h5 class="text-uppercase mb-4" style="color: darkgray;">Image Tools</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{{ url('/csv-to-json-converter')}}" class="text-white nav-link">CSV to JSON Converter</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/json-to-csv-converter')}}" class="text-white nav-link">JSON to CSV Converter</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/json-validator')}}" class="text-white nav-link">JSON Validation</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/json-beautifier')}}" class="text-white nav-link">JSON Beautifier</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/password-generator')}}" class="text-white nav-link">Password Generator</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/sha-generator')}}" class="text-white nav-link">SHA Generator</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/hash-generator')}}" class="text-white nav-link">HASH Generator</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
                 </div>
                 <!--Grid row-->
             </div>
@@ -230,7 +146,7 @@
             <hr />
             <!-- Copyright -->
             <div class="text-center p-3" >
-                © 2020 Copyright:
+                © <?= date('Y')?> Copyright:
                 <a class="text-white" href="https://devrohit.com/">Devrohit</a>
             </div>
             <!-- Copyright -->
@@ -367,6 +283,12 @@
                 $("#def1 li").remove();
                 document.getElementById("def1").style.display="none";
             }
+        }
+        function copyToClipboard(text)
+        {
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(text);
+            generateToast("text-bg-primary", "Link Copied Successfully");
         }
     </script>
      <script src="{{asset('js/lazysizes.min.js')}}" async></script>

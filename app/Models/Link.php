@@ -23,4 +23,9 @@ class Link extends Model
     {
         return $this->belongsTo(Domain::class);
     }
+
+    public function link_visits()
+    {
+        return $this->hasMany(LinkVisit::class);
+    }
 }

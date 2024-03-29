@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title fw-semibold mb-4">Permissions</h5>
-            <form action="{{url('/permissions/store')}}" method="post">
+            <form action="{{url('/admin/permissions/store')}}" method="post">
                 @csrf
                 <table class="table table-bordered">
                     <thead>

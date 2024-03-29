@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Posts @can('add_post')<a class="btn btn-sm btn-primary m-1" href="{{ url('/post/create')}}">Add New</a>@endcan</h5>
+                <h5 class="card-title fw-semibold mb-4">Posts @can('add_post')<a class="btn btn-sm btn-primary m-1" href="{{ url('/admin/post/create')}}">Add New</a>@endcan</h5>
                 <div class="card-body p-4">
                     <div class="table-responsive">
                         @if(!$posts->isEmpty())
@@ -65,12 +65,12 @@
                                     </td>
                                     <td class="border-bottom-0">
                                         @can('edit_post')
-                                        <a href="{{ url('/post/'.$post->id.'/edit')}}"><span>
+                                        <a href="{{ url('/admin/post/'.$post->id.'/edit')}}"><span>
                                             <i class="ti ti-pencil"></i>
                                             </span></a>
                                         @endcan
                                         @can('delete_post')
-                                        <a href="{{ url('/post/'.$post->id.'/delete')}}"><span>
+                                        <a href="{{ url('/admin/post/'.$post->id.'/delete')}}"><span>
                                             <i class="ti ti-trash"></i>
                                             </span></a>
                                         @endcan

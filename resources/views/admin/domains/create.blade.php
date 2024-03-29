@@ -8,9 +8,9 @@
             <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">{{ empty($domain) ? 'Create Domain': 'Update Domain'}}</h5>
                 @if(empty($domain))
-                <form action="{{url('/domain/store')}}" method="domain" enctype="multipart/form-data">
+                <form action="{{url('/admin/domain/store')}}" method="domain" enctype="multipart/form-data">
                 @else
-                <form action="{{url('/domain/'.$domain->uuid.'/update')}}" method="domain" enctype="multipart/form-data">
+                <form action="{{url('/admin/domain/'.$domain->uuid.'/update')}}" method="domain" enctype="multipart/form-data">
                 @endif
                     @csrf
                     <div class="mb-3">
