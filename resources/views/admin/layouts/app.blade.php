@@ -113,11 +113,19 @@
                 <span class="hide-menu">Permissions</span>
               </a>
             </li>
-            <div class="fixed-bottom">
-              <li class="" style="padding: 0px 24px;">
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('/admin/users')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user"></i>
+                </span>
+                <span class="hide-menu">Users</span>
+              </a>
+            </li>
+            <div class="">
+              <li class="" >
                 <a class="btn btn-danger m-1" style="width: 220px;" href="{{url('/admin/optimize-app')}}">Optimize Application</a>
               </li>
-              <li  style="padding: 0px 24px;">
+              <li  >
                 <a class="btn btn-primary m-1" style="width: 220px;" href="{{url('/admin/generate/sitemap')}}">Generate Sitemap</a>
               </li>
             </div>

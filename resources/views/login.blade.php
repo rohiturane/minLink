@@ -4,21 +4,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Super Tools</title>
-  <meta name="title" content="Super Tools" />
-  <meta name="description" content="Login to Super Tools Platforms" />
+  <title>{{env('APP_NAME')}}</title>
+  <meta name="title" content="{{env('APP_NAME')}}" />
+  <meta name="description" content="Login to {{env('APP_NAME')}} Platforms" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/apple-touch-icon.png')}}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/favicon-32x32.png')}}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/favicon-16x16.png')}}">
   <link rel="manifest" href="{{asset('/site.webmanifest')}}">
   <meta name="author" content="DevRohit" />
   <link rel="canonical" href="http://127.0.0.1:8000" />
-  <meta property="twitter:title" content="Super Tools Login" />
-  <meta property="twitter:description" content="Login to Super Tools Platforms" />
+  <meta property="twitter:title" content="{{env('APP_NAME')}} Login" />
+  <meta property="twitter:description" content="Login to {{env('APP_NAME')}} Platforms" />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:image" content="http://127.0.0.1:8000/logo.png" />
-  <meta property="og:title" content="Super Tools Login" />
-  <meta property="og:description" content="Login to Super Tools Platforms" />
+  <meta property="og:title" content="{{env('APP_NAME')}} Login" />
+  <meta property="og:description" content="Login to {{env('APP_NAME')}} Platforms" />
   <meta property="og:image" content="http://127.0.0.1:8000/logo.png" />
   <link rel="stylesheet" href="{{ asset('/css/styles.min.css')}}" />
 </head>

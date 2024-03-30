@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Min-Link</title>
   <meta name="title" content="Min-Link" />
-  <meta name="description" content="Register to Super Tools Platforms" />
+  <meta name="description" content="Register to {{env('APP_NAME')}} Platforms" />
   <meta name="author" content="DevRohit" />
   <link rel="canonical" href="http://127.0.0.1:8000" />
-  <meta property="twitter:title" content="Super Tools Register" />
-  <meta property="twitter:description" content="Register to Super Tools Platforms" />
+  <meta property="twitter:title" content="{{env('APP_NAME')}} Register" />
+  <meta property="twitter:description" content="Register to {{env('APP_NAME')}} Platforms" />
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:image" content="http://127.0.0.1:8000/logo.png" />
-  <meta property="og:title" content="Super Tools Register" />
-  <meta property="og:description" content="Register to Super Tools Platforms" />
+  <meta property="og:title" content="{{env('APP_NAME')}} Register" />
+  <meta property="og:description" content="Register to {{env('APP_NAME')}} Platforms" />
   <meta property="og:image" content="http://127.0.0.1:8000/logo.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="{{asset('/apple-touch-icon.png')}}">
   <link rel="icon" type="image/png" sizes="32x32" href="{{asset('/favicon-32x32.png')}}">
@@ -37,7 +37,7 @@
                 <a href="{{url('/')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
                   <img src="{{ asset('/logo.png')}}" width="180" alt="">
                 </a>
-                <p class="text-center">Super Tools Register</p>
+                <p class="text-center">{{env('APP_NAME')}} Register</p>
                 <form method="post" action="{{ url('/auth/register/user')}}">
                     @csrf
                   <div class="mb-3">

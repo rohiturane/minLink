@@ -4,16 +4,12 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DomainController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\LinkController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserInvoiceController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +84,15 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
     Route::get('/domain/{uuid}/edit',[DomainController::class, 'edit']);
     Route::post('/domain/{uuid}/update',[DomainController::class, 'update']);
     Route::get('/domain/{uuid}/delete',[DomainController::class, 'delete']);
+
+
+    // User
+    Route::get('/users',[UserController::class, 'index']);
+    Route::get('/user/create',[UserController::class, 'create']);
+    Route::post('/user/store',[UserController::class, 'store']);
+    Route::get('/user/{id}/edit',[UserController::class, 'edit']);
+    Route::post('/user/{id}/update',[UserController::class, 'update']);
+    Route::get('/user/{id}/delete',[UserController::class, 'delete']);
 
     // Links
     Route::get('/links',[LinkController::class, 'index']);
