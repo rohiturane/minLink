@@ -1,5 +1,16 @@
 @extends('admin.layouts.app')
 @section('admin_content')
+@php
+$plan;$flag=false;
+$currentPlan = auth()->user()->planSubscriptions->whereNull('cancels_at')->first();
+$pastPlan =auth()->user()->planSubscriptions->whereNotNull('cancels_at')->first();
+if(!empty($currentPlan->plan)){
+    $plan = json_decode($currentPlan->plan);
+} else {
+    $plan = json_decode($pastPlan->plan);
+    $flag = true;
+}
+@endphp
 <div class="container-fluid">
     <div class="container-fluid">
         <div class="card">
@@ -18,13 +29,8 @@
                         <label for="exampleInputEmail1" class="form-label">Email </label>
                         <input type="text" class="form-control" readonly name="email"  value="{{ auth()->user()->email }}" aria-describedby="emailHelp">
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Client ID</label>
-                        <span type="button" onclick="copyToClipboard()" class="btn btn-light">
-                            <i class="ti ti-file-invoice"></i>
-                        </span>
-                        <input type="text" class="form-control " readonly id="client_id" name="client_id"  value="{{ auth()->user()->client_id }}" aria-describedby="emailHelp">
-                    </div>
+                    <hr />
+                    <h5 class="card-title fw-semibold mb-4">Change Your Password</h5>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">New Password </label>
                         <input type="password" class="form-control" id="new_password" name="new_password" aria-describedby="emailHelp">
@@ -38,8 +44,13 @@
                         @if($errors->has('retype_password'))
                             <span class="text-danger ">{{ $errors->first('retype_password');}}</span>
                         @endif
-                    </div>            
+                    </div>   
                     <button type="submit" class="btn btn-primary">Save</button>
+                    <hr />  
+                    <h5 class="card-title fw-semibold mb-4">Subscription Plan</h5>
+                    <h4 class="card-title fw-semibold mb-4"><?= $flag ? 'Past': 'Current'; ?> Plan: <i>{{$plan->name}}</i></h4>
+                    <a class="btn btn-info" href="{{ url('/admin/plans')}}">Upgrade</a> 
+                    <button type="button" class="btn btn-danger" onclick="cancelPlan()">Cancel</button> 
                 </form>
             </div>
         </div>
@@ -60,6 +71,17 @@
     // Alert the copied text
     //alert("Copied the text: " + copyText.value);
     generateToast("text-bg-primary", "Text Copied");
+    }
+
+    function cancelPlan()
+    {
+        $.ajax({
+            url: "{{url('/admin/cancel-plan')}}",
+            method: 'get',
+            success:function(response){
+                console.log(response);
+            }
+        });
     }
 </script>
 @endsection

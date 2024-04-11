@@ -1,11 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Exception;
 use Razorpay\Api\Api;
 use Illuminate\Http\Request;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Log;
+use Laravelcm\Subscriptions\Models\Plan;
 
 class RazorPayController extends Controller
 {
@@ -45,27 +47,35 @@ class RazorPayController extends Controller
                 ]);
                 $data = [
                     'user_id' => $response['notes']['customer_id'],
-                    'user_invoice_id' => $response['notes']['user_invoice_id'],
+                    //'user_invoice_id' => $response['notes']['user_invoice_id'],
                     'payment_platform' => 'razorpay',
                     'payment_platform_ref_no' => $response['order_id'],
                     'status' => $response['status'],
-                    'amount' => $response['amount'],
+                    'amount' => $response['amount']/100,
                     'payment_payload' => json_encode($response)
                 ];
                 $result = $this->service->store($data);
+                // old subscription expire on this month and new subscription start from next month
+                $user = User::find(auth()->id());
+                $plan = Plan::where('slug', $response['notes']['slug'])->first();
+                $user->newPlanSubscription('primary', $plan);
 
                 session()->flash('status','success');
                 session()->flash('message', 'The payment has been successfully processed.');
 
-                return response()->json(['status' => true,'redirectTo' => '/user/invoice']);
+                return response()->json(['status' => true,'redirectTo' => '/admin/dashboard']);
 
             } catch (\Exception $e) {
                 Log::info($e->getMessage());
                 session()->flash('status','error');
                 session()->flash('message', $e->getMessage());
 
-                return response()->json(['status' => false,'redirectTo' => '/user/invoice']);
+                return response()->json(['status' => false,'redirectTo' => '/admin/dashboard']);
             }
+        } else {
+            session()->flash('status','error');
+            session()->flash('message', 'Signature not matched');
+            return response()->json(['status'=>false, 'message'=>'something went wrong!!']);
         }
     }
 

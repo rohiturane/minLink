@@ -10,7 +10,7 @@ use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\StripeWebhookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +39,7 @@ Route::post('/auth/authenicate/user', [AuthController::class,'authenicate']);
 Route::get('/register', [AuthController::class,'register']);
 Route::post('/auth/register/user', [AuthController::class, 'registerUser']);
 Route::post('/logout', [AuthController::class,'logout']);
-
+Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handleWebhook']);
 Route::get('auth/google', [SocialController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
 
@@ -49,6 +49,10 @@ Route::group(['middleware' => ['auth'],'prefix'=>'admin'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile',[AuthController::class,'profile']);
     Route::post('/profile/store', [AuthController::class, 'profileStore']);
+
+    Route::get('/plans',[SubscriptionController::class, 'plans']);
+    Route::get('/plan/{package}',[SubscriptionController::class, 'selectPlan']);
+    Route::get('/cancel-plan', [SubscriptionController::class, 'cancelPlan']);
     
     // blog
     Route::get('/posts',[BlogController::class, 'index']);
