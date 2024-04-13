@@ -3,13 +3,18 @@
 
 @php
 $plan;$flag=false;
-$currentPlan = auth()->user()->planSubscriptions->whereNull('cancels_at')->first();
-$pastPlan =auth()->user()->planSubscriptions->whereNotNull('cancels_at')->first();
-if(!empty($currentPlan->plan)){
-    $plan = json_decode($currentPlan->plan);
+if(!empty(auth()->user()->subscription)) {
+    $currentPlan = auth()->user()->subscription->whereNull('canceled_at')->first();
+    //$pastPlan =auth()->user()->subscription->whereNotNull('canceled_at')->first();
+    if(!empty($currentPlan->plan)){
+        $plan = json_decode($currentPlan->plan);
+    } 
+    /*else {
+        $plan = json_decode($pastPlan->plan);
+        $flag = true;
+    }*/
 } else {
-    $plan = json_decode($pastPlan->plan);
-    $flag = true;
+    $plan = (object) array('name' => '');
 }
 @endphp
 <style>
@@ -126,30 +131,36 @@ if(!empty($currentPlan->plan)){
         </div>
         <div class="row text-center">
             @foreach($plans as $plan)
-            <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
-                <div class="pricing_design">
-                    <div class="single-pricing">
-                        <div class="price-head">
-                            <h2>{{$plan->name}}</h2>
-                            <h1>{{$plan->price}}</h1>
-                            <span>/Monthly</span>
-                        </div>
-                        <ul>
-                            @foreach($plan->features as $feature)
-                            <li><b>{{$feature->value}}</b> {{$feature->name}}</li>
-                            @endforeach
-                        </ul>
-                        <div class="pricing-price">
+                @if($plan->amount > 0)
+                <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.1s; animation-name: fadeInUp;">
+                    <div class="pricing_design">
+                        <div class="single-pricing">
+                            <div class="price-head">
+                                <h2>{{$plan->name}}</h2>
+                                <h1>₹ {{$plan->amount}}</h1>
+                                <span>/Monthly</span>
+                            </div>
+                            <ul>
+                                @foreach($plan->features as $feature)
+                                <li><b>{{(int)$feature->pivot->charges}}</b> {{$feature->name}}</li>
+                                @endforeach
+                            </ul>
+                            <div class="pricing-price">
 
+                            </div>
+                            @if(!empty($currentPlan))
+                                @if($currentPlan->plan_id == $plan->id)
+                                    <p class="btn btn-primary">{{'Current Package'}}</p>
+                                @else 
+                                    <a href="{{ url('/admin/plan/'.encode($plan->id))}}" class="btn btn-primary">{{'Change Package'}}</a>
+                                @endif
+                            @else 
+                            <a href="{{ url('/admin/plan/'.encode($plan->id))}}" class="btn btn-primary">{{'Select Package'}}</a>
+                            @endif
                         </div>
-                        @if($currentPlan->plan_id == $plan->id)
-                            <p class="btn btn-primary">{{'Current Package'}}</p>
-                        @else 
-                            <a href="{{ url('/admin/plan/'.$plan->slug)}}" class="btn btn-primary">{{'Change Package'}}</a>
-                        @endif
                     </div>
-                </div>
-            </div><!--- END COL -->
+                </div><!--- END COL -->
+                @endif
             @endforeach
             
             <!-- <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0" style="visibility: visible; animation-duration: 1s; animation-delay: 0.3s; animation-name: fadeInUp;">

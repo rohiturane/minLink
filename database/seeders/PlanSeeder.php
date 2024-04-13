@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Laravelcm\Subscriptions\Models\Plan;
-use Laravelcm\Subscriptions\Models\Feature;
-use Laravelcm\Subscriptions\Interval;
+use LucasDotVin\Soulbscription\Enums\PeriodicityType;
+use LucasDotVin\Soulbscription\Models\Feature;
+use LucasDotVin\Soulbscription\Models\Plan;
 
 class PlanSeeder extends Seeder
 {
@@ -18,45 +18,50 @@ class PlanSeeder extends Seeder
      */
     public function run()
     {
-        $plan = Plan::create([
-            'name' => 'Basic',
-            'description' => 'Basic plan',
-            'price' => 499,
-            'invoice_period' => 1,
-            'invoice_interval' => Interval::MONTH->value,
-            'trial_period' => 14,
-            'trial_interval' => Interval::DAY->value,
-            // 'sort_order' => 1,
-            'currency' => 'INR',
-        ]);
-        
-        // Create multiple plan features at once
-        $plan->features()->saveMany([
-            new Feature(['name' => 'links', 'value' => 4999, 'sort_order' => 1]),
-            new Feature(['name' => 'domains', 'value' => 1, 'sort_order' => 5]),
+        // Features 
+        $links = Feature::create([
+            'consumable'       => true,
+            'name'             => 'links',
         ]);
 
-        $plan = Plan::create([
-            'name' => 'Pro',
-            'description' => 'Pro plan',
-            'price' => 999,
-            'invoice_period' => 1,
-            'invoice_interval' => Interval::MONTH->value,
-            'trial_period' => 14,
-            'trial_interval' => Interval::DAY->value,
-            // 'sort_order' => 1,
-            'currency' => 'INR',
+        $domains = Feature::create([
+            'consumable'       => true,
+            'name'             => 'domains',
         ]);
-        
-        // Create multiple plan features at once
-        $plan->features()->saveMany([
-            new Feature(['name' => 'links', 'value' => 99999, 'sort_order' => 1]),
-            new Feature(['name' => 'domains', 'value' => 5, 'sort_order' => 5]),
+
+
+        // Plans
+        $bronze = Plan::create([
+            'name'             => 'Bronze',
+            'periodicity_type' => PeriodicityType::Month,
+            'periodicity'      => 1,
+            'amount'           => 0,
         ]);
+
+        $silver = Plan::create([
+            'name'             => 'Silver',
+            'periodicity_type' => PeriodicityType::Month,
+            'periodicity'      => 3,
+            'amount'           => 499,
+        ]);
+
+        $gold = Plan::create([
+            'name'             => 'Gold',
+            'periodicity_type' => PeriodicityType::Month,
+            'periodicity'      => 3,
+            'amount'           => 699,
+        ]);
+
+        $bronze->features()->attach($links, ['charges' => 20]);
+
+        $silver->features()->attach($links, ['charges' => 500]);
+
+        $gold->features()->attach($links, ['charges' => 100000]);
+        $gold->features()->attach($domains,['charges' => 3]);
 
         $user = User::find(1);
 
-        $user->newPlanSubscription('primary', $plan);
+        $user->subscribeTo($gold);
         
     }
 }

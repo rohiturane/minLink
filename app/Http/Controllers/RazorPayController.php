@@ -7,7 +7,7 @@ use Razorpay\Api\Api;
 use Illuminate\Http\Request;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\Log;
-use Laravelcm\Subscriptions\Models\Plan;
+use LucasDotVin\Soulbscription\Models\Plan;
 
 class RazorPayController extends Controller
 {
@@ -52,16 +52,23 @@ class RazorPayController extends Controller
                     'payment_platform_ref_no' => $response['order_id'],
                     'status' => $response['status'],
                     'amount' => $response['amount']/100,
-                    'payment_payload' => json_encode($response)
+                    'payment_payload' => $response
                 ];
                 $result = $this->service->store($data);
                 // old subscription expire on this month and new subscription start from next month
                 $user = User::find(auth()->id());
-                $plan = Plan::where('slug', $response['notes']['slug'])->first();
-                $user->newPlanSubscription('primary', $plan);
+                $plan = Plan::where('id', $response['notes']['plan_id'])->first();
+                $msg = 'The payment has been successfully processed.';
+                if(!empty($user->subscription)) 
+                {
+                    $user->switchTo($plan, immediately: false);
+                    $msg = 'Your Plan will be changed and charged after current plan is expired';
+                } else {
+                    $user->subscribeTo($plan);
+                }
 
                 session()->flash('status','success');
-                session()->flash('message', 'The payment has been successfully processed.');
+                session()->flash('message', $msg);
 
                 return response()->json(['status' => true,'redirectTo' => '/admin/dashboard']);
 
@@ -75,7 +82,7 @@ class RazorPayController extends Controller
         } else {
             session()->flash('status','error');
             session()->flash('message', 'Signature not matched');
-            return response()->json(['status'=>false, 'message'=>'something went wrong!!']);
+            return response()->json(['status'=>false, 'message'=>'something went wrong!!','redirectTo' => '/admin/dashboard']);
         }
     }
 

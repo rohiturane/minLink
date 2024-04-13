@@ -45,7 +45,7 @@
                                         <h6 class="fw-semibold mb-0 fs-4">{{date('d-M-Y H:i:s', strtotime($transaction->created_at))}}</h6>
                                     </td>
                                     <td class="border-bottom-0">
-                                        @can('edit_invoices')
+                                        @can('edit_transaction')
                                         <a target="_blank" href="{{ url('/admin/transaction/'.$transaction->uuid.'/view')}}"><span>
                                             <i class="ti ti-printer"></i>
                                             </span>

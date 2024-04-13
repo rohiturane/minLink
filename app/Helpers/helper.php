@@ -77,6 +77,21 @@ if(!function_exists('encode'))
     }
 }
 
+if(!function_exists('decode'))
+{
+    function decode($pData)
+    {
+        $encryption_key = 'earnmoneywithasset';
+
+        $encryption_iv = '9999999999999999'; 
+
+        $ciphering = "AES-256-CTR"; 
+        
+        $encryption = openssl_decrypt($pData, $ciphering, $encryption_key, 0, $encryption_iv);
+
+        return $encryption;
+    }
+}
 if(!function_exists('get_domain_name'))
 {
     function get_domain_name($url) { 

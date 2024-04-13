@@ -27,7 +27,7 @@ class TransactionController extends Controller
         $html='';
         $transaction = $this->service->get($uuid);
         $css = @file_get_contents(base_path().'/public/vendor/laraberg/css/laraberg.css');
-        $image = asset('/Super Tools.png');
+        $image = asset('/logo.png');
         // Path to your external CSS file
         // $cssFilePath = public_path('vendor/laraberg/css/laraberg.css');
         // echo $image; exit;

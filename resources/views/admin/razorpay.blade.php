@@ -13,7 +13,7 @@
 <script>
 var options = {
     "key": "{{ env('RAZORPAY_KEY_ID') }}", // Enter the Key ID generated from the Dashboard
-    "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "amount": "{{ $plan->amount*100 }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
     "name": "{{ env('APP_NAME') }}",
     "order_id": "{{$razorpayOrder['id']}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -29,7 +29,7 @@ var options = {
         });
     },
     "theme": {
-        "color": "#3399cc"
+        "color": "#8100ed"
     }
 };
 var rzp1 = new Razorpay(options);

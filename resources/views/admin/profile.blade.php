@@ -2,13 +2,13 @@
 @section('admin_content')
 @php
 $plan;$flag=false;
-$currentPlan = auth()->user()->planSubscriptions->whereNull('cancels_at')->first();
-$pastPlan =auth()->user()->planSubscriptions->whereNotNull('cancels_at')->first();
-if(!empty($currentPlan->plan)){
-    $plan = json_decode($currentPlan->plan);
+if(!empty(auth()->user()->subscription)) {
+    $currentPlan = auth()->user()->subscription->whereNull('canceled_at')->first();
+    if(!empty($currentPlan->plan)){
+        $plan = json_decode($currentPlan->plan);
+    } 
 } else {
-    $plan = json_decode($pastPlan->plan);
-    $flag = true;
+    $plan = (object) array('name' => '');
 }
 @endphp
 <div class="container-fluid">
@@ -48,8 +48,10 @@ if(!empty($currentPlan->plan)){
                     <button type="submit" class="btn btn-primary">Save</button>
                     <hr />  
                     <h5 class="card-title fw-semibold mb-4">Subscription Plan</h5>
-                    <h4 class="card-title fw-semibold mb-4"><?= $flag ? 'Past': 'Current'; ?> Plan: <i>{{$plan->name}}</i></h4>
-                    <a class="btn btn-info" href="{{ url('/admin/plans')}}">Upgrade</a> 
+                    @if(!empty($plan->name))
+                    <h4 class="card-title fw-semibold mb-4"><?='Current'; ?> Plan: <i>{{ $plan->name }}</i></h4> 
+                    @endif
+                    <a class="btn btn-info" href="{{ url('/admin/plans')}}">{{ empty($plan->name) ? 'Choose a Plan' : 'Upgrade Plan'}}</a> 
                     <button type="button" class="btn btn-danger" onclick="cancelPlan()">Cancel</button> 
                 </form>
             </div>
@@ -79,7 +81,7 @@ if(!empty($currentPlan->plan)){
             url: "{{url('/admin/cancel-plan')}}",
             method: 'get',
             success:function(response){
-                console.log(response);
+                //console.log(response);
             }
         });
     }

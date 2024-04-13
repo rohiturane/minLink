@@ -10,7 +10,7 @@ use App\Http\Controllers\RazorPayController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\SubscriptionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,7 +39,6 @@ Route::post('/auth/authenicate/user', [AuthController::class,'authenicate']);
 Route::get('/register', [AuthController::class,'register']);
 Route::post('/auth/register/user', [AuthController::class, 'registerUser']);
 Route::post('/logout', [AuthController::class,'logout']);
-Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handleWebhook']);
 Route::get('auth/google', [SocialController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [SocialController::class, 'handleGoogleCallback']);
 
