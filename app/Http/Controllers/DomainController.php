@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use OverflowException;
 
 class DomainController extends Controller
 {
     public function index()
     {
-        $domains = Domain::get();
+        if(auth()->user()->hasRole('admin'))
+        {
+            $domains = Domain::get();
+        } else {
+            $domains = Domain::where('created_by', auth()->id())->get();
+        }
 
         return view('admin.domains.index', compact('domains'));
     }
@@ -23,6 +30,29 @@ class DomainController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->hasFeature('domains'))
+        {
+            session()->flash('status','success');
+            session()->flash('message', "You can't create Domains.");
+
+            return redirect('/admin/dashboard');
+        }
+        
+        try {
+            auth()->user()->consume('domains', 1);
+        } catch (OverflowException $e) {
+            session()->flash('status','success');
+            session()->flash('message', 'Domain limit exceeds. Please go to contact us page');
+
+            return redirect('/');
+        }
+        catch(\Exception $e) {
+            session()->flash('status','success');
+            session()->flash('message', 'Something went wrong!!');
+            Log::info('Error occurs in creating domains '.print_r($e->getMessage(), true));
+            return redirect('/admin/dashboard');
+        }
+
         $input_array = $request->all();
 
         $validate = Validator::make($input_array, [
@@ -40,8 +70,7 @@ class DomainController extends Controller
             'domain' => $input_array['domain'],
             'redirect' => $input_array['redirect'],
             'status' => $input_array['status']
-        ]);
-
+        ]); 
         session()->flash('status','success');
         session()->flash('message', 'Domain Saved Successfully');
 

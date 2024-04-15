@@ -52,9 +52,9 @@ class PlanSeeder extends Seeder
             'amount'           => 699,
         ]);
 
-        $bronze->features()->attach($links, ['charges' => 20]);
+        $bronze->features()->attach($links, ['charges' => 2000]);
 
-        $silver->features()->attach($links, ['charges' => 500]);
+        $silver->features()->attach($links, ['charges' => 50000]);
 
         $gold->features()->attach($links, ['charges' => 100000]);
         $gold->features()->attach($domains,['charges' => 3]);

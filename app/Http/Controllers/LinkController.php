@@ -18,13 +18,19 @@ use GuzzleHttp\Client;
 use Illuminate\Http\File;
 use Exception;
 use Illuminate\Support\Facades\Storage;
+use OverflowException;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LinkController extends Controller
 {
     public function index()
     {
-        $links = Link::with('user','link_visits')->get();
+        if(auth()->user()->hasRole('admin'))
+        {
+            $links = Link::with('user','link_visits')->get();
+        } else {
+            $links = Link::with('user','link_visits')->where('user_id', auth()->id())->get();
+        }
 
         return view('admin.links.index', compact('links'));
     }
@@ -38,6 +44,29 @@ class LinkController extends Controller
 
     public function store(Request $request)
     {
+        if(!auth()->user()->hasFeature('links'))
+        {
+            session()->flash('status','success');
+            session()->flash('message', "You can't create links.");
+
+            return redirect('/admin/dashboard');
+        }
+        
+        try {
+            auth()->user()->consume('links', 1);
+        } catch (OverflowException $e) {
+            session()->flash('status','success');
+            session()->flash('message', 'Links limit exceeds. Please go to contact us page');
+
+            return redirect('/');
+        }
+        catch(\Exception $e) {
+            session()->flash('status','success');
+            session()->flash('message', 'Something went wrong!!');
+            Log::info('Error occurs in creating Links '.print_r($e->getMessage(), true));
+            return redirect('/admin/dashboard');
+        }
+
         $input_array = $request->all();
 
         $validate = Validator::make($input_array, [
@@ -422,7 +451,26 @@ class LinkController extends Controller
             $link->user_id = auth()->user()->id;
         }
         $link->save();
+        if(empty($request->guest)) {
+            $guest = [
+                'id' => randomString(5),
+                'count' => 5,
+                'date' => date('Y-m-d')
+            ];
+        } else {
+            if($request->guest['date'] != date('Y-m-d')) 
+            {
+                $guest = [
+                    'id' => randomString(5),
+                    'count' => 5,
+                    'date' => date('Y-m-d')
+                ];
+            } else {
+                $guest = $request->guest;
+                $guest['count'] = $guest['count']-1;
+            }
+        }
 
-        return response()->json(['status'=>true, 'link' => $link]);
+        return response()->json(['status'=>true, 'link' => $link, 'guest' => $guest]);
     }
 }

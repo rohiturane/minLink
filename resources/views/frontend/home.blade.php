@@ -118,22 +118,33 @@
 <!-- Footer-->
 <script>
     $('#submitButton').click(function(){
-        $.ajax({
-            method: 'post',
-            url: '/api/generate/short-link',
-            data: {
-                'link' : $('#link').val()
-            },
-            success: function(response){
-                if(response.status) {
-                    var link = response.link;
-                    var short = "'"+window.location.hostname+'/'+link.code+"'";
-                    var row = '<tr><td>'+link.title+'</td><td>'+link.url+'</td><td>'+window.location.hostname+'/'+link.code+'</td><td><button type="button" onclick="copyToClipboard('+short+')" class="btn btn-sm"><i class="bi bi-clipboard m-auto text-primary"></i></button></td></tr>';
-                    $('#short_div').css('display', 'block');
-                    $('#table').append(row);
+        let guest = JSON.parse(localStorage.getItem('guest') ?? '{}');
+        var oDateOne = new Date(guest.date);
+        var oDateTwo = new Date();
+        // console.log(oDateTwo)
+        if(guest.count > 0 || oDateOne <= oDateTwo)
+        {
+            $.ajax({
+                method: 'post',
+                url: '/api/generate/short-link',
+                data: {
+                    'link' : $('#link').val(),
+                    'guest': guest
+                },
+                success: function(response){
+                    if(response.status) {
+                        localStorage.setItem('guest', JSON.stringify(response.guest));
+                        var link = response.link;
+                        var short = "'"+window.location.hostname+'/'+link.code+"'";
+                        var row = '<tr><td>'+link.title+'</td><td>'+link.url+'</td><td>'+window.location.hostname+'/'+link.code+'</td><td><button type="button" onclick="copyToClipboard('+short+')" class="btn btn-sm"><i class="bi bi-clipboard m-auto text-primary"></i></button></td></tr>';
+                        $('#short_div').css('display', 'block');
+                        $('#table').append(row);
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            generateToast("text-bg-danger", "Daily Limit exceeds. Please create an account or login");
+        }
     });
 </script>
 @endsection
